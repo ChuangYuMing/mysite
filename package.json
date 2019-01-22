@@ -63,7 +63,7 @@
     "regenerator-runtime": "0.10.5",
     "style-loader": "0.23.1",
     "stylelint": "^9.9.0",
-    "stylelint-config-pixnet": "git+ssh://git@git.pixnet.work:f2e/stylelint-config-pixnet.git#master",
+    "stylelint-config-standard": "^18.2.0",
     "url-loader": "1.1.2",
     "webpack": "~4.28.0",
     "webpack-bundle-analyzer": "~3.0.3",

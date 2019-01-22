@@ -3,5 +3,5 @@
 @import '../../shared/styles/base/_base.css';
 
 .background-test {
-    background-image: url("../../assets/images/testimg.png");
+  background-image: url('../../assets/images/testimg.png');
 }
