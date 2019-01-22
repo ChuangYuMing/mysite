@@ -1,7 +1,7 @@
 {
-  "name": "ReactSeed",
+  "name": "JamieChuang",
   "version": "1.0.0",
-  "description": "ReactSeed",
+  "description": "JamieChuang",
   "main": "index.js",
   "jest": {
     "setupFiles": [
