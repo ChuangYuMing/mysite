@@ -1,0 +1,13 @@
+// vscode 可以直接cmd+ click 連到import 的 webpack alias file
+
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+        "modules/*": ["src/modules/*"]
+    }
+  },
+  "exclude": [
+    "node_modules"
+  ]
+}
