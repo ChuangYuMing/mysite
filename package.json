@@ -20,6 +20,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "classnames": "2.2.6",
+    "express": "^4.17.1",
     "normalize.css": "^8.0.1",
     "react": "~16.6.3",
     "react-dom": "~16.6.3",
@@ -79,7 +80,8 @@
     "test": "jest",
     "dev": "NODE_ENV='development' webpack-dev-server --devtool eval --progress --colors --config=webpack.dev.config.js",
     "build": "NODE_ENV='production' webpack --progress --colors --config=webpack.prod.config.js",
-    "csslint": "stylelint 'src/**/*.css' --cache --cache-location './.stylelintcache/'"
+    "csslint": "stylelint 'src/**/*.css' --cache --cache-location './.stylelintcache/'",
+    "server": "cd server && node app.js"
   },
   "author": "",
   "license": "ISC"
