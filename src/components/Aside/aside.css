@@ -1,0 +1,10 @@
+.wrapper {
+  width: 300px;
+  padding: 20px 10px 10px 10px;
+
+  aside {
+    height: 250px;
+    margin-bottom: 20px;
+    border: solid 1px #000;
+  }
+}

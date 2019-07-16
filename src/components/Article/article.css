@@ -1,0 +1,13 @@
+.wrapper {
+  flex: 1;
+  padding-left: 250px;
+}
+
+.title {
+  font-size: 30px;
+}
+
+.content {
+  font-size: 18px;
+  word-wrap: break-word;
+}

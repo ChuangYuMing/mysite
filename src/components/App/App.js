@@ -5,7 +5,6 @@ import { Route, Switch } from 'react-router-dom'
 import classNames from 'classnames/bind'
 import styles from './App.css'
 import Main from '../Main/Main'
-import backgroundTest from '../../assets/images/testimg.png'
 
 let cx = classNames.bind(styles)
 class App extends React.PureComponent {
@@ -15,14 +14,10 @@ class App extends React.PureComponent {
   }
 
   render() {
-
     return (
-      <div className={styles['background-test']}>
-        <img src={backgroundTest} alt="backgroundTest"/>
-        <Switch>
-          <Route exact path={'/'} component={Main} />
-        </Switch>
-      </div>
+      <Switch>
+        <Route exact path={'/'} component={Main} />
+      </Switch>
     )
   }
 }
@@ -30,7 +25,4 @@ class App extends React.PureComponent {
 const mapStateToProps = state => {
   return {}
 }
-export default withRouter(connect(
-  mapStateToProps
-)(App))
-
+export default withRouter(connect(mapStateToProps)(App))

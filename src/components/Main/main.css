@@ -1,16 +1,7 @@
-.main-wrap {
-  color: #f00;
+.wrapper {
+  color: #4c4c4ce3;
 }
 
-.selector,
-.selector-secondary,
-.selector[type="text"] {
-  margin: 0 0 15px;
-  padding: 15px;
-  background-color: rgba(0, 0, 0, 0.5);
-  box-shadow: 0 1px 2px #ccc, inset 0 1px 0 #fff;
-}
-
-.selector {
-  -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+.container {
+  display: flex;
 }

@@ -3,6 +3,9 @@ import { connect } from 'react-redux'
 import { changeValueTest } from '../../store/reducers/test'
 import styles from './main.css'
 import classNames from 'classnames/bind'
+import Navbar from '../Navbar/Navbar'
+import Article from '../Article/Article'
+import Aside from '../Aside/Aside'
 
 let cx = classNames.bind(styles)
 class Main extends Component {
@@ -10,22 +13,25 @@ class Main extends Component {
     super()
   }
 
-  componentDidMount() {
-    const { changeValueTest } = this.props
-    setTimeout(() => {
-      changeValueTest({ testValue: 'test new value'})
-    }, 2000)
-  }
+  componentDidMount() {}
   componentWillUnmount() {}
 
   render() {
-    return <div className={cx('main-wrap')}>{this.props.test}</div>
+    return (
+      <main className={cx('wrapper')}>
+        <Navbar />
+        <div className={cx('container')}>
+          <Article />
+          <Aside />
+        </div>
+      </main>
+    )
   }
 }
 
 export default connect(
-  (state) => ({
-    test: state.test.testValue,
+  state => ({
+    test: state.test.testValue
   }),
   { changeValueTest }
-)(Main);
+)(Main)
