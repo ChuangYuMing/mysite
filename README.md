@@ -1,3 +1,3 @@
-# ReactSeed
+# JamieChuang
 
 My personal site
