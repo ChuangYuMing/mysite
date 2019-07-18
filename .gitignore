@@ -32,3 +32,4 @@ chrome-user-data
 *.svn-base
 .svn/
 .stylelintcache
+.env
