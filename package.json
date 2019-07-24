@@ -56,6 +56,7 @@
     "husky": "^1.3.1",
     "identity-obj-proxy": "~3.0.0",
     "mini-css-extract-plugin": "~0.4.0",
+    "newrelic": "^5.10.0",
     "postcss-cssnext": "~3.1.0",
     "postcss-global-import": "~1.0.6",
     "postcss-import": "~12.0.1",
@@ -84,7 +85,8 @@
     "dev": "NODE_ENV='development' webpack-dev-server -d --progress --colors --config=webpack.dev.config.js",
     "build": "NODE_ENV='production' webpack --progress --colors --config=webpack.prod.config.js",
     "csslint": "stylelint 'src/**/*.css' --cache --cache-location './.stylelintcache/'",
-    "server": "cd server && node app.js"
+    "server": "cd server && node app.js",
+    "deploy": "heroku container:login && heroku container:push web && heroku container:release web"
   },
   "author": "",
   "license": "ISC"
