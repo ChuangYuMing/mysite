@@ -4,8 +4,10 @@ import {
   CHANGE_GET_ARTICLE_STATUS,
   UPDATE_ARTICLE
 } from '../actions/actionTypes'
+import { API_DOMAIN, LOCAL_API_DOMAIN } from '../../constant'
 
 const updateArticle = createAction(UPDATE_ARTICLE, updates => updates)
+let apiDomain = PRODUCTION ? API_DOMAIN : LOCAL_API_DOMAIN
 
 export const changeGetArticleStatus = createAction(
   CHANGE_GET_ARTICLE_STATUS,
@@ -16,7 +18,7 @@ export const getArticleAsync = url => {
   return (dispatch, getState) => {
     dispatch(changeGetArticleStatus({ isFetching: true }))
     axios
-      .get(`http://localhost:3000/api/article?url=${url}`)
+      .get(`${apiDomain}/api/article?url=${url}`)
       .then(res => {
         dispatch(
           updateArticle({
