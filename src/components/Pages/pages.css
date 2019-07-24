@@ -1,0 +1,29 @@
+.wrapper {
+  flex: 1;
+}
+
+.items {
+  width: 800px;
+  min-height: 100%;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.item {
+  font-size: 30px;
+  border-bottom: solid 2px;
+  height: 80px;
+  margin-bottom: 10px;
+  line-height: 80px;
+  cursor: pointer;
+
+  a {
+    color: #4c4c4ce3;
+  }
+
+  &:hover {
+    a {
+      color: #9a4b4b;
+    }
+  }
+}

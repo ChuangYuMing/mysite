@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import styles from './navbar.css'
 import classNames from 'classnames/bind'
 import logo from '../../assets/images/logo.png'
+import { Link } from 'react-router-dom'
 
 let cx = classNames.bind(styles)
 class Navbar extends Component {
@@ -9,12 +10,7 @@ class Navbar extends Component {
     super()
   }
 
-  componentDidMount() {
-    const { changeValueTest } = this.props
-    setTimeout(() => {
-      changeValueTest({ testValue: 'test new value' })
-    }, 2000)
-  }
+  componentDidMount() {}
   componentWillUnmount() {}
 
   render() {
@@ -22,9 +18,9 @@ class Navbar extends Component {
       <div className={cx('wrapper')}>
         <img className={cx('logo')} src={logo} />
         <nav className={cx('category')}>
-          <a>Economics</a>
-          <a>Technology</a>
-          <a>Coding</a>
+          <Link to="/finance">Finance</Link>
+          <Link to="/technology">Technology</Link>
+          <Link to="/politics">Politics</Link>
         </nav>
       </div>
     )

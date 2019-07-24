@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux'
-import test from './test'
+import pages from './pages'
+import article from './article'
 
 const rootReducer = combineReducers({
-  test
+  pages,
+  article
 })
 
 export default rootReducer

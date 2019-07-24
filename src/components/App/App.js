@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import { Route, Switch } from 'react-router-dom'
+import { Route } from 'react-router-dom'
 import classNames from 'classnames/bind'
 import styles from './App.css'
 import Main from '../Main/Main'
@@ -14,11 +14,7 @@ class App extends React.PureComponent {
   }
 
   render() {
-    return (
-      <Switch>
-        <Route exact path={'/'} component={Main} />
-      </Switch>
-    )
+    return <Route component={Main} />
   }
 }
 
