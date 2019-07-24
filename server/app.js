@@ -1,10 +1,10 @@
+require('newrelic')
 const express = require('express')
 const app = express()
 const cors = require('cors')
 const port = process.env.PORT || 3000
 const { Pool } = require('pg')
 require('dotenv').config()
-require('newrelic')
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
