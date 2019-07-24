@@ -86,7 +86,7 @@
     "build": "NODE_ENV='production' webpack --progress --colors --config=webpack.prod.config.js",
     "csslint": "stylelint 'src/**/*.css' --cache --cache-location './.stylelintcache/'",
     "server": "cd server && node app.js",
-    "deploy": "heroku container:login && heroku container:push web && heroku container:release web"
+    "deploy": "npm run build && heroku container:login && heroku container:push web && heroku container:release web"
   },
   "author": "",
   "license": "ISC"
