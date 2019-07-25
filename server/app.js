@@ -33,7 +33,7 @@ app.get('/api/article', async (req, res) => {
     client.release()
   } catch (err) {
     console.error(err)
-    res.send('Error ' + err)
+    res.json({error: true, msg: err})
   }
 })
 
@@ -55,7 +55,7 @@ app.get('/api/pages/:category', async (req, res) => {
     client.release()
   } catch (err) {
     console.error(err)
-    res.send('Error ' + err)
+    res.json({error: true, msg: err})
   }
 })
 
