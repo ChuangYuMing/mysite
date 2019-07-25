@@ -3,6 +3,7 @@ import styles from './navbar.css'
 import classNames from 'classnames/bind'
 import logo from '../../assets/images/logo.png'
 import { Link, withRouter } from 'react-router-dom'
+import MenuBtn from './MenuBtn/MenuBtn'
 
 let cx = classNames.bind(styles)
 class Navbar extends Component {
@@ -50,23 +51,19 @@ class Navbar extends Component {
           <div className={cx('top')}>
             <img className={cx('logo')} src={logo} onClick={this.goHome} />
             <span className={cx('title')}>ChildBen</span>
-            <button
+            <MenuBtn
               className={cx('menu')}
-              type="text"
               onClick={this.toggleMenu}
-            >
-              menu
-            </button>
+              color="#000"
+            />
           </div>
           <nav className={menucx}>
-            <button
-              className={cx('menu')}
-              type="text"
+            <MenuBtn
+              className={cx('menu2')}
               onClick={this.toggleMenu}
-            >
-              menu2
-            </button>
-            <div classNames={cx('links')}>
+              color="#fff"
+            />
+            <div className={cx('links')} onClick={this.toggleMenu}>
               <Link to="/finance">Finance</Link>
               <Link to="/technology">Technology</Link>
               <Link to="/politics">Politics</Link>

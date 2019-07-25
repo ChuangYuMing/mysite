@@ -1,23 +1,39 @@
 .wrapper {
   flex: 1;
+  min-height: calc(100vh - 85px);
 }
 
 .items {
   width: 800px;
-  min-height: 100%;
-  margin: 0 auto;
+  margin: 10px auto 0 auto;
   padding: 20px;
+
+  @media screen and (max-width: 812px) {
+    width: 100%;
+    padding: 0;
+  }
 }
 
 .item {
-  font-size: 30px;
-  border-bottom: solid 2px;
+  display: flex;
+  align-items: center;
+  width: 100vw;
   height: 80px;
-  margin-bottom: 10px;
   line-height: 80px;
+  font-size: 30px;
+  border: 1px solid #e9e9e9;
   cursor: pointer;
+  padding: 20px 15px;
+  border-bottom: 0;
+
+  @media screen and (max-width: 812px) {
+    font-size: 20px;
+  }
 
   a {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     color: #4c4c4ce3;
   }
 
