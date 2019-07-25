@@ -9,15 +9,20 @@
 .logo {
   width: 45px;
   height: 45px;
+  cursor: pointer;
 }
 
 .category {
   display: inline-flex;
   margin-left: 50px;
-  color: #927272;
   font-size: 20px;
 
   a {
     padding: 0 20px;
+    color: #927272;
+
+    &:hover {
+      color: #555c9a;
+    }
   }
 }

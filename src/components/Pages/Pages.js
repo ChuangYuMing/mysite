@@ -32,6 +32,11 @@ class Pages extends Component {
 
   render() {
     let pages = this.props.pages
+
+    if (!pages) {
+      return <div>ooops! something wrong</div>
+    }
+
     let rows = pages.map(item => {
       return (
         <div className={cx('item')} key={item.title}>

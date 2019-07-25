@@ -2,12 +2,17 @@ import React, { Component } from 'react'
 import styles from './navbar.css'
 import classNames from 'classnames/bind'
 import logo from '../../assets/images/logo.png'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 
 let cx = classNames.bind(styles)
 class Navbar extends Component {
   constructor() {
     super()
+    this.goHome = this.goHome.bind(this)
+  }
+
+  goHome() {
+    this.props.history.push('/')
   }
 
   componentDidMount() {}
@@ -16,7 +21,7 @@ class Navbar extends Component {
   render() {
     return (
       <div className={cx('wrapper')}>
-        <img className={cx('logo')} src={logo} />
+        <img className={cx('logo')} src={logo} onClick={this.goHome} />
         <nav className={cx('category')}>
           <Link to="/finance">Finance</Link>
           <Link to="/technology">Technology</Link>
@@ -27,4 +32,4 @@ class Navbar extends Component {
   }
 }
 
-export default Navbar
+export default withRouter(Navbar)

@@ -33,7 +33,7 @@ class Article extends Component {
     let { title, content } = this.props
 
     if (!title) {
-      return <div />
+      return <article className={cx('wrapper')}></article>
     }
 
     return (
