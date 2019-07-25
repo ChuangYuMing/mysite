@@ -12,11 +12,7 @@ process.traceDeprecation = true
 module.exports = {
   mode: 'development',
   devtool: '#cheap-module-eval-source-map',
-  entry: [
-    '@babel/polyfill',
-    'react-hot-loader/patch',
-    './src/index.js'
-  ],
+  entry: ['@babel/polyfill', 'react-hot-loader/patch', './src/index.js'],
   output: {
     path: path.resolve(__dirname, 'build'),
     filename: 'bundle.js',
@@ -64,10 +60,11 @@ module.exports = {
           {
             loader: 'css-loader',
             options: {
-              modules: true,
+              modules: {
+                localIdentName: '[name]_[local]_[hash:base64:5]'
+              },
               importLoaders: 1,
-              sourceMap: true,
-              localIdentName: '[name]_[local]_[hash:base64:5]'
+              sourceMap: true
             }
           },
           {
