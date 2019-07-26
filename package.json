@@ -65,6 +65,7 @@
     "postcss-nested": "~4.1.1",
     "postcss-simple-vars": "~5.0.1",
     "react-hot-loader": "~4.6.3",
+    "react-snap": "^1.23.0",
     "regenerator-runtime": "0.10.5",
     "style-loader": "0.23.1",
     "stylelint": "^9.9.0",
@@ -80,12 +81,17 @@
       "pre-commit": "npm run csslint"
     }
   },
+  "reactSnap": {
+    "inlineCss": true,
+    "cacheAjaxRequests": true
+  },
   "scripts": {
     "test": "jest",
     "dev": "NODE_ENV='development' webpack-dev-server -d --progress --colors --config=webpack.dev.config.js",
     "build": "NODE_ENV='production' webpack --progress --colors --config=webpack.prod.config.js",
     "csslint": "stylelint 'src/**/*.css' --cache --cache-location './.stylelintcache/'",
-    "server": "cd server && node app.js",
+    "server": "cd server && NODE_ENV=production node app.js",
+    "postbuild": "react-snap",
     "deploy": "npm run build && heroku container:login && heroku container:push web && heroku container:release web"
   },
   "author": "",

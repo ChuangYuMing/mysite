@@ -1,13 +1,13 @@
 require('newrelic')
 const express = require('express')
-const path = require('path');
+const path = require('path')
 const app = express()
 const cors = require('cors')
 const port = process.env.PORT || 3000
 const { Pool } = require('pg')
 require('dotenv').config()
-let apiRouter = express.Router();
-let router = express.Router();
+let apiRouter = express.Router()
+let router = express.Router()
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
@@ -17,15 +17,50 @@ const pool = new Pool({
 app.use(express.json())
 app.use(cors())
 
-
 app.use('/api', apiRouter)
 app.use('/static', express.static('../build/static'))
 app.use('/', router)
 
-router.get('*', (req,res) =>{
-  res.sendFile(path.resolve(__dirname, '../build/index.html'));
-});
+router.get('/favicon.ico', (req, res, next) => {
+  res.sendFile(path.resolve(__dirname, `../build/favicon.ico`))
+})
 
+//for prerender
+if (process.env.NODE_ENV === 'production') {
+  router.get('/:category', (req, res, next) => {
+    let { category, url } = req.params
+
+    res.sendFile(
+      path.resolve(__dirname, `../build/${category}/index.html`),
+      {},
+      err => {
+        if (err) {
+          next()
+        }
+      }
+    )
+  })
+
+  router.get('/:category/:url', (req, res, next) => {
+    let { category, url } = req.params
+
+    res.sendFile(
+      path.resolve(__dirname, `../build/${category}/${url}/index.html`),
+      {},
+      err => {
+        if (err) {
+          next()
+        }
+      }
+    )
+  })
+}
+
+router.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../build/index.html'))
+})
+
+// api router
 apiRouter.get('/article', async (req, res) => {
   let url = req.query.url
 
@@ -39,7 +74,7 @@ apiRouter.get('/article', async (req, res) => {
     client.release()
   } catch (err) {
     console.error(err)
-    res.json({error: true, msg: err})
+    res.json({ error: true, msg: err })
   }
 })
 
@@ -61,7 +96,7 @@ apiRouter.get('/pages/:category', async (req, res) => {
     client.release()
   } catch (err) {
     console.error(err)
-    res.json({error: true, msg: err})
+    res.json({ error: true, msg: err })
   }
 })
 
