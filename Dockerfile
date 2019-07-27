@@ -6,4 +6,5 @@ COPY . ./
 # stage: 2 — the production environment
 # EXPOSE 3000
 WORKDIR /server/
+ENV NODE_ENV production
 CMD [ "node", "app.js" ]
