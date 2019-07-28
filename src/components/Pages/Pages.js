@@ -4,6 +4,7 @@ import classNames from 'classnames/bind'
 import { connect } from 'react-redux'
 import { getPagesAsync } from '../../store/reducers/pages'
 import { Link } from 'react-router-dom'
+import { Helmet } from 'react-helmet'
 
 let cx = classNames.bind(styles)
 
@@ -47,6 +48,13 @@ class Pages extends Component {
     return (
       <div className={cx('wrapper')}>
         <div className={cx('items')}>{rows}</div>
+        <Helmet>
+          <title>ChildBen</title>
+          <meta
+            name="description"
+            content="The blog about everything you want"
+          />
+        </Helmet>
       </div>
     )
   }

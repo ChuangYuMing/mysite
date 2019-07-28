@@ -67,7 +67,7 @@ apiRouter.get('/article', async (req, res) => {
   try {
     const client = await pool.connect()
     const result = await client.query(
-      `SELECT category, url, title, content FROM pages WHERE url = '${url}'`
+      `SELECT category, url, title, content, description, keywords FROM pages WHERE url = '${url}'`
     )
     const results = { results: result ? result.rows[0] : null }
     res.json(results)

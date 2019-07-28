@@ -3,6 +3,7 @@ import styles from './article.css'
 import classNames from 'classnames/bind'
 import { connect } from 'react-redux'
 import { getArticleAsync } from '../../store/reducers/article'
+import { Helmet } from 'react-helmet'
 
 let cx = classNames.bind(styles)
 
@@ -30,10 +31,10 @@ class Article extends Component {
 
   render() {
     console.log(this.props)
-    let { title, content } = this.props
+    let { title, content, description, keywords } = this.props
 
     if (!title) {
-      return <article className={cx('wrapper')}></article>
+      return <article className={cx('wrapper')} />
     }
 
     return (
@@ -43,6 +44,11 @@ class Article extends Component {
           className={cx('content')}
           dangerouslySetInnerHTML={{ __html: content }}
         />
+        <Helmet>
+          <title>{title}</title>
+          <meta name="description" content={description} />
+          <meta name="keywords" content={keywords} />
+        </Helmet>
       </article>
     )
   }
@@ -51,7 +57,9 @@ class Article extends Component {
 export default connect(
   state => ({
     content: state.article.datas.content,
-    title: state.article.datas.title
+    title: state.article.datas.title,
+    description: state.article.datas.description,
+    keywords: state.article.datas.keywords
   }),
   { getArticleAsync }
 )(Article)
