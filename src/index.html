@@ -23,20 +23,22 @@
     </script>
     <!-- Register the PerformanceObserver to track paint timing. -->
     <script>
-      const observer = new PerformanceObserver(list => {
-        for (const entry of list.getEntries()) {
-          // `name` will be either 'first-paint' or 'first-contentful-paint'.
-          const metricName = entry.name
-          const time = Math.round(entry.startTime + entry.duration)
+      if (PerformanceObserver) {
+        const observer = new PerformanceObserver(list => {
+          for (const entry of list.getEntries()) {
+            // `name` will be either 'first-paint' or 'first-contentful-paint'.
+            const metricName = entry.name
+            const time = Math.round(entry.startTime + entry.duration)
 
-          gtag('event', metricName, {
-            event_label: time,
-            event_category: 'Performance Metrics',
-            non_interaction: true
-          })
-        }
-      })
-      observer.observe({ entryTypes: ['paint'] })
+            gtag('event', metricName, {
+              event_label: time,
+              event_category: 'Performance Metrics',
+              non_interaction: true
+            })
+          }
+        })
+        observer.observe({ entryTypes: ['paint'] })
+      }
     </script>
   </head>
 
