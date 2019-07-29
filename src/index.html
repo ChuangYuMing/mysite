@@ -7,14 +7,36 @@
       name="viewport"
       content="width=device-width,minimum-scale=1,initial-scale=1"
     />
-    <meta name="author" content="Child Ben"></meta>
+    <meta name="author" content="Child Ben" />
     <title>ChildBen</title>
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-144731980-1"></script>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-144731980-1"
+    ></script>
     <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+      window.dataLayer = window.dataLayer || []
+      function gtag() {
+        dataLayer.push(arguments)
+      }
+      gtag('js', new Date())
+    </script>
+    <!-- Register the PerformanceObserver to track paint timing. -->
+    <script>
+      const observer = new PerformanceObserver(list => {
+        for (const entry of list.getEntries()) {
+          // `name` will be either 'first-paint' or 'first-contentful-paint'.
+          const metricName = entry.name
+          const time = Math.round(entry.startTime + entry.duration)
+
+          gtag('event', metricName, {
+            event_label: time,
+            event_category: 'Performance Metrics',
+            non_interaction: true
+          })
+        }
+      })
+      observer.observe({ entryTypes: ['paint'] })
     </script>
   </head>
 
