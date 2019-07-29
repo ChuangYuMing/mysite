@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import { getPagesAsync } from '../../store/reducers/pages'
 import { Link } from 'react-router-dom'
 import { Helmet } from 'react-helmet'
+import { sendPageView } from '../../utils/tracking'
 
 let cx = classNames.bind(styles)
 
@@ -23,12 +24,14 @@ class Pages extends Component {
     let preCategory = prevProps.match.params.category
     if (category !== preCategory) {
       this.getPages(category)
+      sendPageView(category)
     }
   }
 
   componentDidMount() {
     let { category } = this.props.match.params
     this.getPages(category)
+    sendPageView(category)
   }
 
   render() {

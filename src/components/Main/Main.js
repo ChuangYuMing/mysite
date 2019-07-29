@@ -24,7 +24,7 @@ class Main extends Component {
           <Switch>
             <Route exact path="/" component={Pages} />
             <Route exact path="/:category" component={Pages} />
-            <Route path="/:category/:title" component={Article} />
+            <Route path="/:category/:url" component={Article} />
           </Switch>
           <Aside />
         </div>

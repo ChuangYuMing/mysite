@@ -4,6 +4,7 @@ import classNames from 'classnames/bind'
 import { connect } from 'react-redux'
 import { getArticleAsync } from '../../store/reducers/article'
 import { Helmet } from 'react-helmet'
+import { sendPageView } from '../../utils/tracking'
 
 let cx = classNames.bind(styles)
 
@@ -21,16 +22,17 @@ class Article extends Component {
     let { url: preUrl } = prevProps.match.params
     if (url !== preUrl) {
       this.getArticle(url)
+      sendPageView(url)
     }
   }
 
   componentDidMount() {
-    let { title: url } = this.props.match.params
+    let { url } = this.props.match.params
     this.getArticle(url)
+    sendPageView(url)
   }
 
   render() {
-    console.log(this.props)
     let { title, content, description, keywords } = this.props
 
     if (!title) {
