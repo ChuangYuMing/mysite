@@ -22,7 +22,11 @@ app.use('/static', express.static('../build/static'))
 app.use('/', router)
 
 router.get('/favicon.ico', (req, res, next) => {
-  res.sendFile(path.resolve(__dirname, `../build/favicon.ico`))
+  res.sendFile(path.resolve(__dirname, `../build/static/images/favicon.ico`))
+})
+
+router.get('/manifest.json', (req, res, next) => {
+  res.sendFile(path.resolve(__dirname, `../build/manifest.json`))
 })
 
 //for prerender

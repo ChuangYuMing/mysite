@@ -47,6 +47,7 @@
     "babel-plugin-transform-async-to-generator": "~6.24.1",
     "babel-preset-react": "6.24.1",
     "clean-webpack-plugin": "0.1.18",
+    "copy-webpack-plugin": "^5.0.4",
     "css-loader": "^3.1.0",
     "cssnano": "~4.1.7",
     "enzyme": "~3.3.0",
@@ -92,8 +93,8 @@
     "build": "NODE_ENV='production' webpack --progress --colors --config=webpack.prod.config.js",
     "csslint": "stylelint 'src/**/*.css' --cache --cache-location './.stylelintcache/'",
     "server": "cd server && NODE_ENV=production node app.js",
-    "postbuild": "react-snap",
-    "deploy": "npm run build && heroku container:login && heroku container:push web && heroku container:release web"
+    "prerender": "react-snap",
+    "deploy": "npm run build && npm run prerender && heroku container:login && heroku container:push web && heroku container:release web"
   },
   "author": "",
   "license": "ISC"

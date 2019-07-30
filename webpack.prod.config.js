@@ -6,6 +6,7 @@ const webpack = require('webpack')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
+const CopyPlugin = require('copy-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
   .BundleAnalyzerPlugin
 
@@ -70,7 +71,11 @@ module.exports = {
     }),
     new webpack.DefinePlugin({
       PRODUCTION: JSON.stringify(true)
-    })
+    }),
+    new CopyPlugin([
+      { from: './manifest.json', to: './' },
+      { from: './src/assets/images', to: './static/images' }
+    ])
   ],
   module: {
     rules: [
