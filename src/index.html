@@ -27,7 +27,6 @@
       sizes="16x16"
       href="/static/favicon-16x16.png"
     />
-    <link rel="manifest" href="/manifest.json" />
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script
       async
@@ -40,25 +39,7 @@
       }
       gtag('js', new Date())
     </script>
-    <!-- Register the PerformanceObserver to track paint timing. -->
-    <script>
-      if (PerformanceObserver) {
-        const observer = new PerformanceObserver(list => {
-          for (const entry of list.getEntries()) {
-            // `name` will be either 'first-paint' or 'first-contentful-paint'.
-            const metricName = entry.name
-            const time = Math.round(entry.startTime + entry.duration)
 
-            gtag('event', metricName, {
-              event_label: time,
-              event_category: 'Performance Metrics',
-              non_interaction: true
-            })
-          }
-        })
-        observer.observe({ entryTypes: ['paint'] })
-      }
-    </script>
     <script
       async
       src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
