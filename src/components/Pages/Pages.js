@@ -6,6 +6,7 @@ import { getPagesAsync } from '../../store/reducers/pages'
 import { Link } from 'react-router-dom'
 import { Helmet } from 'react-helmet'
 import { sendPageView } from '../../utils/tracking'
+import LoadingBtn from '../Common/LoadingBtn/LoadingBtn'
 
 let cx = classNames.bind(styles)
 
@@ -30,15 +31,24 @@ class Pages extends Component {
 
   componentDidMount() {
     let { category } = this.props.match.params
-    this.getPages(category)
+    let { pages } = this.props
+
+    if (pages.length === 0) {
+      this.getPages(category)
+    }
+
     sendPageView(category)
   }
 
   render() {
     let pages = this.props.pages
 
-    if (!pages) {
-      return <div>ooops! something wrong</div>
+    if (!pages || this.props.isFetching) {
+      return (
+        <article className={cx('wrapper')}>
+          <LoadingBtn />
+        </article>
+      )
     }
 
     let rows = pages.map(item => {
@@ -48,6 +58,7 @@ class Pages extends Component {
         </div>
       )
     })
+
     return (
       <div className={cx('wrapper')}>
         <div className={cx('items')}>{rows}</div>
@@ -65,7 +76,8 @@ class Pages extends Component {
 
 export default connect(
   state => ({
-    pages: state.pages.datas
+    pages: state.pages.datas,
+    isFetching: state.pages.isFetching
   }),
   { getPagesAsync }
 )(Pages)

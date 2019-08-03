@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import { getArticleAsync } from '../../store/reducers/article'
 import { Helmet } from 'react-helmet'
 import { sendPageView } from '../../utils/tracking'
+import LoadingBtn from '../Common/LoadingBtn/LoadingBtn'
 
 let cx = classNames.bind(styles)
 
@@ -28,15 +29,23 @@ class Article extends Component {
 
   componentDidMount() {
     let { url } = this.props.match.params
-    this.getArticle(url)
+
+    // prerender已經有資料就不用再發request
+    if (this.props.datas.url !== url) {
+      this.getArticle(url)
+    }
     sendPageView(url)
   }
 
   render() {
-    let { title, content, description, keywords } = this.props
+    let { title, content, description, keywords, url } = this.props.datas
 
-    if (!title) {
-      return <article className={cx('wrapper')} />
+    if (!url || this.props.isFetching) {
+      return (
+        <article className={cx('wrapper')}>
+          <LoadingBtn />
+        </article>
+      )
     }
 
     return (
@@ -58,10 +67,8 @@ class Article extends Component {
 
 export default connect(
   state => ({
-    content: state.article.datas.content,
-    title: state.article.datas.title,
-    description: state.article.datas.description,
-    keywords: state.article.datas.keywords
+    datas: state.article.datas,
+    isFetching: state.article.isFetching
   }),
   { getArticleAsync }
 )(Article)
