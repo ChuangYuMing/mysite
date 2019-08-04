@@ -28,47 +28,6 @@
     />
     <link rel="manifest" href="/manifest.json" />
     <title>ChildBen</title>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script
-      defer
-      src="https://www.googletagmanager.com/gtag/js?id=UA-144731980-1"
-    ></script>
-    <script>
-      window.dataLayer = window.dataLayer || []
-      function gtag() {
-        dataLayer.push(arguments)
-      }
-      gtag('js', new Date())
-    </script>
-    <!-- Register the PerformanceObserver to track paint timing. -->
-    <script>
-      if (PerformanceObserver) {
-        const observer = new PerformanceObserver(list => {
-          for (const entry of list.getEntries()) {
-            // `name` will be either 'first-paint' or 'first-contentful-paint'.
-            const metricName = entry.name
-            const time = Math.round(entry.startTime + entry.duration)
-
-            gtag('event', metricName, {
-              event_label: time,
-              event_category: 'Performance Metrics',
-              non_interaction: true
-            })
-          }
-        })
-        observer.observe({ entryTypes: ['paint'] })
-      }
-    </script>
-    <script
-      defer
-      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-    ></script>
-    <script>
-      ;(adsbygoogle = window.adsbygoogle || []).push({
-        google_ad_client: 'ca-pub-9548714402616173',
-        enable_page_level_ads: true
-      })
-    </script>
   </head>
 
   <body>
