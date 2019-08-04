@@ -29,6 +29,10 @@ router.get('/manifest.json', (req, res, next) => {
   res.sendFile(path.resolve(__dirname, `../build/manifest.json`))
 })
 
+router.get('/robots.txt', (req, res, next) => {
+  res.sendFile(path.resolve(__dirname, `../build/robots.txt`))
+})
+
 //for prerender
 if (process.env.NODE_ENV === 'production') {
   router.get('/:category', (req, res, next) => {

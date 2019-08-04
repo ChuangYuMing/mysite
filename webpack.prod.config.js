@@ -74,6 +74,7 @@ module.exports = {
     }),
     new CopyPlugin([
       { from: './manifest.json', to: './' },
+      { from: './robots.txt', to: './' },
       { from: './src/assets/images', to: './static/images' }
     ])
   ],
