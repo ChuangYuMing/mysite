@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import styles from './pages.css'
 import classNames from 'classnames/bind'
 import { connect } from 'react-redux'
-import { getPagesAsync } from '../../store/reducers/pages'
+import { getPagesAsync, clearPages } from '../../store/reducers/pages'
 import { Link } from 'react-router-dom'
 import { Helmet } from 'react-helmet'
 import { sendPageView } from '../../utils/tracking'
@@ -23,13 +23,21 @@ class Pages extends Component {
   componentDidUpdate(prevProps) {
     let category = this.props.match.params.category
     let preCategory = prevProps.match.params.category
+    console.log(category, preCategory)
+
     if (category !== preCategory) {
       this.getPages(category)
       sendPageView(category)
     }
   }
 
+  componentWillUnmount() {
+    this.props.clearPages()
+  }
+
   componentDidMount() {
+    console.log('componentDidMount')
+
     let { category } = this.props.match.params
     let { pages } = this.props
 
@@ -85,5 +93,5 @@ export default connect(
     pages: state.pages.datas,
     isFetching: state.pages.isFetching
   }),
-  { getPagesAsync }
+  { getPagesAsync, clearPages }
 )(Pages)
