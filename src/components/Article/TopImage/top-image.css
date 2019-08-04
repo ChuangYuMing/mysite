@@ -1,0 +1,8 @@
+.thumb {
+  width: 730px;
+  height: 484px;
+}
+
+.blur {
+  filter: blur(5px);
+}

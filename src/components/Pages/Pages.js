@@ -54,6 +54,12 @@ class Pages extends Component {
     let rows = pages.map(item => {
       return (
         <div className={cx('item')} key={item.title}>
+          <img
+            src={require(`../../assets/images/${item.url}/${
+              item.url
+            }-thumb.jpg`)}
+            alt={item.title}
+          />
           <Link to={`/${item.category}/${item.url}`}>{item.title}</Link>
         </div>
       )

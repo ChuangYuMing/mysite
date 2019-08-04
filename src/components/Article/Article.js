@@ -6,6 +6,7 @@ import { getArticleAsync } from '../../store/reducers/article'
 import { Helmet } from 'react-helmet'
 import { sendPageView } from '../../utils/tracking'
 import LoadingBtn from '../Common/LoadingBtn/LoadingBtn'
+import TopImage from './TopImage/TopImage'
 
 let cx = classNames.bind(styles)
 
@@ -39,8 +40,11 @@ class Article extends Component {
 
   render() {
     let { title, content, description, keywords, url } = this.props.datas
+    let { url: browserUrl } = this.props.match.params
+    let isChrome =
+      !!window.chrome && (!!window.chrome.webstore || !!window.chrome.runtime)
 
-    if (!url || this.props.isFetching) {
+    if (url !== browserUrl || this.props.isFetching) {
       return (
         <article className={cx('wrapper')}>
           <LoadingBtn />
@@ -51,6 +55,7 @@ class Article extends Component {
     return (
       <article className={cx('wrapper')}>
         <h2 className={cx('title')}>{title}</h2>
+        <TopImage type={isChrome ? 'webp' : 'jpg'} url={url} />
         <div
           className={cx('content')}
           dangerouslySetInnerHTML={{ __html: content }}
