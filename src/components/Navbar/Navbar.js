@@ -40,7 +40,12 @@ class Navbar extends Component {
     return (
       <>
         <div className={cx('wrapper')}>
-          <img className={cx('logo')} src={logo} onClick={this.goHome} />
+          <img
+            className={cx('logo')}
+            src={logo}
+            onClick={this.goHome}
+            alt="Logo"
+          />
           <nav className={cx('category')}>
             <Link to="/finance">Finance</Link>
             <Link to="/technology">Technology</Link>
@@ -49,7 +54,12 @@ class Navbar extends Component {
         </div>
         <div className={cx('mb-wrapper')}>
           <div className={cx('top')}>
-            <img className={cx('logo')} src={logo} onClick={this.goHome} />
+            <img
+              className={cx('logo')}
+              src={logo}
+              onClick={this.goHome}
+              alt="Logo"
+            />
             <span className={cx('title')}>ChildBen</span>
             <MenuBtn
               className={cx('menu')}

@@ -17,6 +17,7 @@ class TopImage extends Component {
 
       img.addEventListener('load', () => {
         this.myRef.current.src = bigImageUrl
+        this.myRef.current.alt = this.props.title
         this.myRef.current.classList.remove(styles.blur)
       })
 
