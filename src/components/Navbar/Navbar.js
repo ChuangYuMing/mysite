@@ -47,9 +47,15 @@ class Navbar extends Component {
             alt="Logo"
           />
           <nav className={cx('category')}>
-            <Link to="/finance">Finance</Link>
-            <Link to="/technology">Technology</Link>
-            <Link to="/politics">Politics</Link>
+            <Link to="/finance" aria-label="Finance">
+              Finance
+            </Link>
+            <Link to="/technology" aria-label="Technology">
+              Technology
+            </Link>
+            <Link to="/politics" aria-label="Politics">
+              Politics
+            </Link>
           </nav>
         </div>
         <div className={cx('mb-wrapper')}>

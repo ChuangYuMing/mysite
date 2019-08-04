@@ -23,7 +23,6 @@ class Pages extends Component {
   componentDidUpdate(prevProps) {
     let category = this.props.match.params.category
     let preCategory = prevProps.match.params.category
-    console.log(category, preCategory)
 
     if (category !== preCategory) {
       this.getPages(category)
@@ -36,8 +35,6 @@ class Pages extends Component {
   }
 
   componentDidMount() {
-    console.log('componentDidMount')
-
     let { category } = this.props.match.params
     let { pages } = this.props
 

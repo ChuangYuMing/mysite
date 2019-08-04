@@ -4,6 +4,7 @@ const MenuBtn = ({ className, onClick, color }) => (
   <svg
     className={className}
     onClick={onClick}
+    aria-label="menu"
     height="32px"
     version="1.1"
     viewBox="0 0 32 32"
