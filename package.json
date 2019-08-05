@@ -30,6 +30,7 @@
     "react-helmet": "^6.0.0-beta",
     "react-redux": "~6.0.0",
     "react-router-dom": "4.3.1",
+    "react-router-sitemap": "^1.2.0",
     "redux": "~4.0.1",
     "redux-actions": "^2.6.4",
     "redux-observable": "~1.0.0",
@@ -37,10 +38,12 @@
     "rxjs": "6.3.3"
   },
   "devDependencies": {
+    "@babel/cli": "^7.5.5",
     "@babel/core": "^7.2.2",
     "@babel/polyfill": "^7.0.0",
     "@babel/preset-env": "^7.2.0",
     "@babel/preset-react": "^7.0.0",
+    "@babel/register": "^7.5.5",
     "autoprefixer": "~9.4.2",
     "babel-jest": "23.6.0",
     "babel-loader": "^8.0.4",
@@ -94,7 +97,8 @@
     "csslint": "stylelint 'src/**/*.css' --cache --cache-location './.stylelintcache/'",
     "server": "cd server && NODE_ENV=production node app.js",
     "prerender": "react-snap",
-    "deploy": "npm run build && npm run prerender && heroku container:login && heroku container:push web && heroku container:release web && docker image prune -f"
+    "sitemap": "cd server && node sitemap-generator.js",
+    "deploy": "npm run build && npm run prerender && npm run sitemap && heroku container:login && heroku container:push web && heroku container:release web && docker image prune -f"
   },
   "author": "",
   "license": "ISC"

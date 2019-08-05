@@ -25,6 +25,10 @@ router.get('/favicon.ico', (req, res, next) => {
   res.sendFile(path.resolve(__dirname, `../build/static/images/favicon.ico`))
 })
 
+router.get('/sitemap.xml', (req, res, next) => {
+  res.sendFile(path.resolve(__dirname, `../build/sitemap.xml`))
+})
+
 router.get('/manifest.json', (req, res, next) => {
   res.sendFile(path.resolve(__dirname, `../build/manifest.json`))
 })
