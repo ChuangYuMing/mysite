@@ -80,9 +80,15 @@ class Navbar extends Component {
               color="#fff"
             />
             <div className={cx('links')} onClick={this.toggleMenu}>
-              <Link to="/finance">Finance</Link>
-              <Link to="/technology">Technology</Link>
-              <Link to="/politics">Politics</Link>
+              <Link to="/finance" aria-label="Finance">
+                Finance
+              </Link>
+              <Link to="/technology" aria-label="Technology">
+                Technology
+              </Link>
+              <Link to="/politics" aria-label="Politics">
+                Politics
+              </Link>
             </div>
           </nav>
         </div>
