@@ -7,7 +7,12 @@ import { Helmet } from 'react-helmet'
 import { sendPageView } from '../../utils/tracking'
 import LoadingBtn from '../Common/LoadingBtn/LoadingBtn'
 import TopImage from './TopImage/TopImage'
+import hljs from 'highlight.js/lib/highlight'
+import javascript from 'highlight.js/lib/languages/javascript'
+import './highlight.css'
 
+hljs.registerLanguage('javascript', javascript)
+hljs.configure({ useBR: true })
 let cx = classNames.bind(styles)
 
 class Article extends Component {
@@ -38,6 +43,11 @@ class Article extends Component {
     sendPageView(url)
   }
 
+  componentDidUpdate() {
+    document.querySelectorAll('pre').forEach(block => {
+      hljs.highlightBlock(block)
+    })
+  }
   render() {
     let { title, content, description, keywords, url } = this.props.datas
     let { url: browserUrl } = this.props.match.params
