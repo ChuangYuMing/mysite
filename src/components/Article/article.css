@@ -1,9 +1,11 @@
 .wrapper {
   flex: 1;
+  max-width: 980px;
   padding-left: 250px;
 
   @media screen and (max-width: 812px) {
     padding: 20px;
+    max-width: 100vw;
   }
 }
 
