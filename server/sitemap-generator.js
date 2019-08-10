@@ -37,6 +37,9 @@ async function generateSitemap() {
         },
         {
           category: 'politics'
+        },
+        {
+          coding: 'coding'
         }
       ],
       '/:category/:url': idMap
