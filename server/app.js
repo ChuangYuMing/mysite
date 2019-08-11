@@ -79,7 +79,7 @@ apiRouter.get('/article', async (req, res) => {
   try {
     const client = await pool.connect()
     const result = await client.query(
-      `SELECT category, url, title, content, description, keywords FROM pages WHERE url = '${url}'`
+      `SELECT category, url, title, content, description, keywords FROM pages WHERE url = '${url}' AND status = 'open'`
     )
     const results = { results: result ? result.rows[0] : null }
     res.json(results)
@@ -95,9 +95,9 @@ apiRouter.get('/pages/:category', async (req, res) => {
   let queryStr = ''
 
   if (category === 'all') {
-    queryStr = 'SELECT category, url, title FROM pages ORDER BY id DESC '
+    queryStr = `SELECT category, url, title FROM pages WHERE status = 'open' ORDER BY id DESC`
   } else {
-    queryStr = `SELECT category, url, title FROM pages WHERE category = '${category}' ORDER BY id DESC`
+    queryStr = `SELECT category, url, title FROM pages WHERE category = '${category}' AND status = 'open' ORDER BY id DESC`
   }
 
   try {
