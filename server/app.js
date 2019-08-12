@@ -81,7 +81,7 @@ apiRouter.get('/article', async (req, res) => {
     const result = await client.query(
       `SELECT category, url, title, content, description, keywords FROM pages WHERE url = '${url}' AND status = 'open'`
     )
-    const results = { results: result ? result.rows[0] : null }
+    const results = { results: result ? result.rows[0] : {} }
     res.json(results)
     client.release()
   } catch (err) {
@@ -103,7 +103,7 @@ apiRouter.get('/pages/:category', async (req, res) => {
   try {
     const client = await pool.connect()
     const result = await client.query(queryStr)
-    const results = { results: result ? result.rows : null }
+    const results = { results: result ? result.rows : [] }
     res.json(results)
     client.release()
   } catch (err) {
