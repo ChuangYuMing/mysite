@@ -5,6 +5,7 @@ import Navbar from '../Navbar/Navbar'
 import Article from '../Article/Article'
 import Aside from '../Aside/Aside'
 import Pages from '../Pages/Pages'
+import NotFound from '../NotFound/NotFound'
 import { Route, Switch } from 'react-router-dom'
 
 let cx = classNames.bind(styles)

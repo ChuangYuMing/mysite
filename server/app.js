@@ -37,36 +37,32 @@ router.get('/robots.txt', (req, res, next) => {
   res.sendFile(path.resolve(__dirname, `../build/robots.txt`))
 })
 
-//for prerender
-if (process.env.NODE_ENV === 'production') {
-  router.get('/:category', (req, res, next) => {
-    let { category, url } = req.params
-
-    res.sendFile(
-      path.resolve(__dirname, `../build/${category}/index.html`),
-      {},
-      err => {
-        if (err) {
-          next()
-        }
+router.get('/:category', (req, res, next) => {
+  let { category, url } = req.params
+  res.sendFile(
+    path.resolve(__dirname, `../build/${category}/index.html`),
+    {},
+    err => {
+      if (err) {
+        next()
       }
-    )
-  })
+    }
+  )
+})
 
-  router.get('/:category/:url', (req, res, next) => {
-    let { category, url } = req.params
+router.get('/:category/:url', (req, res, next) => {
+  let { category, url } = req.params
 
-    res.sendFile(
-      path.resolve(__dirname, `../build/${category}/${url}/index.html`),
-      {},
-      err => {
-        if (err) {
-          next()
-        }
+  res.sendFile(
+    path.resolve(__dirname, `../build/${category}/${url}/index.html`),
+    {},
+    err => {
+      if (err) {
+        next()
       }
-    )
-  })
-}
+    }
+  )
+})
 
 router.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../build/index.html'))
@@ -81,7 +77,9 @@ apiRouter.get('/article', async (req, res) => {
     const result = await client.query(
       `SELECT category, url, title, content, description, keywords FROM pages WHERE url = '${url}' AND status = 'open'`
     )
-    const results = { results: result ? result.rows[0] : {} }
+
+    const results = { results: result.rows.length !== 0 ? result.rows[0] : {} }
+
     res.json(results)
     client.release()
   } catch (err) {
@@ -103,7 +101,7 @@ apiRouter.get('/pages/:category', async (req, res) => {
   try {
     const client = await pool.connect()
     const result = await client.query(queryStr)
-    const results = { results: result ? result.rows : [] }
+    const results = { results: result.rows.length !== 0 ? result.rows : [] }
     res.json(results)
     client.release()
   } catch (err) {

@@ -10,6 +10,7 @@ import TopImage from './TopImage/TopImage'
 import hljs from 'highlight.js/lib/highlight'
 import javascript from 'highlight.js/lib/languages/javascript'
 import './highlight.css'
+import NotFound from '../NotFound/NotFound'
 
 hljs.registerLanguage('javascript', javascript)
 hljs.configure({ useBR: true })
@@ -49,11 +50,6 @@ class Article extends Component {
     })
   }
   render() {
-    let { title, content, description, keywords, url } = this.props.datas
-    let { url: browserUrl } = this.props.match.params
-    let isChrome =
-      !!window.chrome && (!!window.chrome.webstore || !!window.chrome.runtime)
-
     if (url !== browserUrl || this.props.isFetching) {
       return (
         <article className={cx('wrapper')}>
@@ -62,6 +58,14 @@ class Article extends Component {
       )
     }
 
+    if (!this.props.isFetching && !this.props.datas.url) {
+      return <NotFound />
+    }
+
+    let { title, content, description, keywords, url } = this.props.datas
+    let { url: browserUrl } = this.props.match.params
+    let isChrome =
+      !!window.chrome && (!!window.chrome.webstore || !!window.chrome.runtime)
     return (
       <article className={cx('wrapper')}>
         <h2 className={cx('title')}>{title}</h2>
