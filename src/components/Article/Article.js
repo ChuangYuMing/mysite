@@ -59,7 +59,7 @@ class Article extends Component {
       !!window.chrome && (!!window.chrome.webstore || !!window.chrome.runtime)
     return (
       <article className={cx('wrapper')}>
-        <h2 className={cx('title')}>{title}</h2>
+        <h1 className={cx('title')}>{title}</h1>
         <TopImage type={isChrome ? 'webp' : 'jpg'} url={url} />
         <div
           className={cx('content')}
