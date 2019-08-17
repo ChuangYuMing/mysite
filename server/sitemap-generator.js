@@ -31,15 +31,6 @@ async function generateSitemap() {
       '/:category': [
         {
           category: 'finance'
-        },
-        {
-          category: 'technology'
-        },
-        {
-          category: 'politics'
-        },
-        {
-          coding: 'coding'
         }
       ],
       '/:category/:url': idMap
