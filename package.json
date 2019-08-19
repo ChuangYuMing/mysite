@@ -89,7 +89,7 @@
   },
   "reactSnap": {
     "inlineCss": true,
-    "cacheAjaxRequests": true
+    "cacheAjaxRequests": false
   },
   "scripts": {
     "test": "jest",

@@ -91,6 +91,8 @@ class Article extends Component {
                 "dateCreated": "${date}",
                 "dateModified": "${date}",
                 "description": "${description}",
+                "publisher": "Child Ben",
+                "mainEntityOfPage": "https://www.childben.com/${category}/${url}",
                 "author": {
                   "@type": "Person",
                   "name": "Child Ben"
