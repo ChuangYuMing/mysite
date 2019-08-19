@@ -15,7 +15,7 @@ const pool = new Pool({
 
 async function generateSitemap() {
   try {
-    const queryStr = 'SELECT category, url FROM pages ORDER BY id DESC '
+    const queryStr = `SELECT category, url FROM pages WHERE status = 'open' ORDER BY id DESC `
     const client = await pool.connect()
     const result = await client.query(queryStr)
     let idMap = []
