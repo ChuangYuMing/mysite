@@ -91,7 +91,17 @@ class Article extends Component {
                 "dateCreated": "${date}",
                 "dateModified": "${date}",
                 "description": "${description}",
-                "publisher": "Child Ben",
+                "publisher": {
+                  "@type": "Organization",
+                  "name": "Blog Name",
+                  "url": "https://www.childben.com",
+                  "logo": {
+                  	"@type": "ImageObject",
+                    "url": "https://www.childben.com/static/images/android-icon-96x96.png",
+                    "width": 96,
+                    "height": 96
+                  }
+                },
                 "mainEntityOfPage": "https://www.childben.com/${category}/${url}",
                 "author": {
                   "@type": "Person",
