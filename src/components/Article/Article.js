@@ -53,7 +53,15 @@ class Article extends Component {
       return <NotFound />
     }
 
-    let { title, content, description, keywords, url } = this.props.datas
+    let {
+      title,
+      content,
+      description,
+      keywords,
+      url,
+      date,
+      category
+    } = this.props.datas
     let { url: browserUrl } = this.props.match.params
     let isChrome =
       !!window.chrome && (!!window.chrome.webstore || !!window.chrome.runtime)
@@ -69,6 +77,27 @@ class Article extends Component {
           <title>{title}</title>
           <meta name="description" content={description} />
           <meta name="keywords" content={keywords} />
+          <script type="application/ld+json">
+            {`
+              {
+                "@context": "https://schema.org",
+                "@type": "BlogPosting",
+                "headline": "${title}",
+                "image": "https://www.childben.com/static/images/${url}/${url}.jpg",
+                "editor": "Child Ben",
+                "keywords": "${keywords}",
+                "url": "https://www.childben.com/${category}/${url}",
+                "datePublished": "${date}",
+                "dateCreated": "${date}",
+                "dateModified": "${date}",
+                "description": "${description}",
+                "author": {
+                  "@type": "Person",
+                  "name": "Child Ben"
+                }
+              }
+          `}
+          </script>
         </Helmet>
       </article>
     )
