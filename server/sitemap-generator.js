@@ -29,7 +29,7 @@ async function generateSitemap() {
     })
 
     console.log(sitemap.toXML())
-    await fs.writeFile('../build/sitemap.xml', sitemap.toXML(), function(err) {
+    fs.outputFileSync('../build/sitemap.xml', sitemap.toXML(), function(err) {
       if (err) {
         console.log(err)
       }
