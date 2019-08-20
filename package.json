@@ -23,6 +23,7 @@
     "cors": "^2.8.5",
     "dotenv": "^8.0.0",
     "express": "^4.17.1",
+    "fs-extra": "^8.1.0",
     "highlight.js": "^9.15.9",
     "newrelic": "^5.10.0",
     "normalize.css": "^8.0.1",
@@ -32,12 +33,12 @@
     "react-helmet": "^6.0.0-beta",
     "react-redux": "~6.0.0",
     "react-router-dom": "4.3.1",
-    "react-router-sitemap": "^1.2.0",
     "redux": "~4.0.1",
     "redux-actions": "^2.6.4",
     "redux-observable": "~1.0.0",
     "redux-thunk": "2.3.0",
-    "rxjs": "6.3.3"
+    "rxjs": "6.3.3",
+    "sitemap": "^4.1.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.5.5",
