@@ -10,7 +10,7 @@ export function sendPageView(title = 'childben') {
   })
 }
 
-export function sendTracEvent({
+export function sendTrackEvent({
   category,
   action,
   label,

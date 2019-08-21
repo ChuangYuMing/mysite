@@ -5,7 +5,7 @@ import { Route } from 'react-router-dom'
 import classNames from 'classnames/bind'
 import styles from './App.css'
 import Main from '../Main/Main'
-import { sendTracEvent } from '../../utils/tracking'
+import { sendTrackEvent } from '../../utils/tracking'
 
 let cx = classNames.bind(styles)
 class App extends React.PureComponent {
@@ -60,7 +60,7 @@ function performanceTrack() {
         const metricName = entry.name
         const time = Math.round(entry.startTime + entry.duration)
 
-        sendTracEvent({
+        sendTrackEvent({
           category: 'Performance Metrics',
           action: metricName,
           value: time
