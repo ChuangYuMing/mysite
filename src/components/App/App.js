@@ -42,8 +42,8 @@ class App extends React.PureComponent {
     if (PRODUCTION && navigator.userAgent != 'ReactSnap') {
       loadAdSense()
       performanceTrack()
+      this.scrollDepthTrack()
     }
-    this.scrollDepthTrack()
   }
   render() {
     return <Route component={Main} />
