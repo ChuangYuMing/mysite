@@ -9,3 +9,18 @@ export function sendPageView(title = 'childben') {
     page_location: window.location.href
   })
 }
+
+export function sendTracEvent({
+  category,
+  action,
+  label,
+  value,
+  nonInteraction = true
+}) {
+  window.gtag('event', action, {
+    event_category: category,
+    event_label: label,
+    value,
+    non_interaction: nonInteraction
+  })
+}
