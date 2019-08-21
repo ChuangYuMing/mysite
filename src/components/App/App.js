@@ -6,13 +6,36 @@ import classNames from 'classnames/bind'
 import styles from './App.css'
 import Main from '../Main/Main'
 import { sendTrackEvent } from '../../utils/tracking'
+import debounce from '../../utils/debounce'
 
 let cx = classNames.bind(styles)
 class App extends React.PureComponent {
   constructor(props) {
     super(props)
     this.haveload = false
+    this.maxScrollDepth = 0
+    this.scrollDepthTrack = this.scrollDepthTrack.bind(this)
     loadGa()
+  }
+
+  scrollDepthTrack() {
+    if (window.pageYOffset === undefined) {
+      return
+    }
+
+    const updateMaxDepth = debounce(() => {
+      this.maxScrollDepth = Math.max(window.pageYOffset, this.maxScrollDepth)
+    }, 200)
+
+    document.addEventListener('scroll', updateMaxDepth)
+
+    window.addEventListener('beforeunload', event => {
+      sendTrackEvent({
+        category: 'scroll',
+        action: 'scroll_depth',
+        value: this.maxScrollDepth
+      })
+    })
   }
 
   componentDidMount() {
@@ -20,6 +43,7 @@ class App extends React.PureComponent {
       loadAdSense()
       performanceTrack()
     }
+    this.scrollDepthTrack()
   }
   render() {
     return <Route component={Main} />
