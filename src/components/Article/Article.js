@@ -60,11 +60,14 @@ class Article extends Component {
       keywords,
       url,
       date,
-      category
+      category,
+      modified_time
     } = this.props.datas
     let { url: browserUrl } = this.props.match.params
     let isChrome =
       !!window.chrome && (!!window.chrome.webstore || !!window.chrome.runtime)
+
+    modified_time = modified_time ? modified_time : date
     return (
       <article className={cx('wrapper')}>
         <h1 className={cx('title')}>{title}</h1>
@@ -101,7 +104,7 @@ class Article extends Component {
           <meta property="og:description" content={description} />
           <meta property="og:site_name" content="ChildBen" />
           <meta property="article:published_time" content={date} />
-          <meta property="article:modified_time" content={date} />
+          <meta property="article:modified_time" content={modified_time} />
           <meta property="fb:admins" content="100031410993377" />
 
           <script type="application/ld+json">
@@ -116,7 +119,7 @@ class Article extends Component {
                 "url": "https://www.childben.com/${category}/${url}",
                 "datePublished": "${date}",
                 "dateCreated": "${date}",
-                "dateModified": "${date}",
+                "dateModified": "${modified_time}",
                 "description": "${description}",
                 "publisher": {
                   "@type": "Organization",
