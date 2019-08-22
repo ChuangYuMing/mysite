@@ -1,10 +1,5 @@
-require('@babel/register')({
-  ignore: [/node_modules/],
-  presets: ['@babel/preset-env', '@babel/preset-react']
-})
-
-const router = require('../sitemap-routes').default
-const Sitemap = require('react-router-sitemap').default
+const { createSitemap } = require('sitemap')
+const fs = require('fs-extra')
 const { Pool } = require('pg')
 require('dotenv').config()
 
@@ -21,26 +16,25 @@ async function generateSitemap() {
     let idMap = []
 
     for (var i = 0; i < result.rows.length; i++) {
+      let { url, category } = result.rows[i]
       idMap.push({
-        category: result.rows[i].category,
-        url: result.rows[i].url
+        url: `/${category}/${url}`,
+        img: `https://cdn.childben.com/${url}/${url}.jpg`
       })
     }
 
-    const paramsConfig = {
-      '/:category': [
-        {
-          category: 'finance'
-        }
-      ],
-      '/:category/:url': idMap
-    }
+    const sitemap = createSitemap({
+      hostname: 'https://www.childben.com',
+      urls: [{ url: '/' }, { url: '/finance/' }, ...idMap]
+    })
 
-    client.release()
-    return new Sitemap(router)
-      .applyParams(paramsConfig)
-      .build('https://www.childben.com/')
-      .save('../build/sitemap.xml')
+    console.log(sitemap.toXML())
+    fs.outputFileSync('../build/sitemap.xml', sitemap.toXML(), function(err) {
+      if (err) {
+        console.log(err)
+      }
+    })
+    process.exit()
   } catch (e) {
     console.log(e)
   }

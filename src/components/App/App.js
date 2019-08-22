@@ -5,19 +5,44 @@ import { Route } from 'react-router-dom'
 import classNames from 'classnames/bind'
 import styles from './App.css'
 import Main from '../Main/Main'
+import { sendTrackEvent } from '../../utils/tracking'
+import debounce from '../../utils/debounce'
 
 let cx = classNames.bind(styles)
 class App extends React.PureComponent {
   constructor(props) {
     super(props)
     this.haveload = false
+    this.maxScrollDepth = 0
+    this.scrollDepthTrack = this.scrollDepthTrack.bind(this)
     loadGa()
+  }
+
+  scrollDepthTrack() {
+    if (window.pageYOffset === undefined) {
+      return
+    }
+
+    const updateMaxDepth = debounce(() => {
+      this.maxScrollDepth = Math.max(window.pageYOffset, this.maxScrollDepth)
+    }, 200)
+
+    document.addEventListener('scroll', updateMaxDepth)
+
+    window.addEventListener('beforeunload', event => {
+      sendTrackEvent({
+        category: 'scroll',
+        action: 'scroll_depth',
+        value: this.maxScrollDepth
+      })
+    })
   }
 
   componentDidMount() {
     if (PRODUCTION && navigator.userAgent != 'ReactSnap') {
       loadAdSense()
       performanceTrack()
+      this.scrollDepthTrack()
     }
   }
   render() {
@@ -59,10 +84,10 @@ function performanceTrack() {
         const metricName = entry.name
         const time = Math.round(entry.startTime + entry.duration)
 
-        window.gtag('event', metricName, {
-          event_label: time,
-          event_category: 'Performance Metrics',
-          non_interaction: true
+        sendTrackEvent({
+          category: 'Performance Metrics',
+          action: metricName,
+          value: time
         })
       }
     })

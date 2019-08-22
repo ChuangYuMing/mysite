@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom'
 import { Helmet } from 'react-helmet'
 import { sendPageView } from '../../utils/tracking'
 import LoadingBtn from '../Common/LoadingBtn/LoadingBtn'
+import { CDN_DOMAIN } from '../../constant'
 
 let cx = classNames.bind(styles)
 
@@ -60,9 +61,7 @@ class Pages extends Component {
       return (
         <div className={cx('item')} key={item.title}>
           <img
-            src={require(`../../assets/images/${item.url}/${
-              item.url
-            }-thumb.jpg`)}
+            src={`${CDN_DOMAIN}/${item.url}/${item.url}-thumb.jpg`}
             alt={item.title}
           />
           <Link to={`/${item.category}/${item.url}`}>{item.title}</Link>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import styles from './top-image.css'
 import classNames from 'classnames/bind'
+import { CDN_DOMAIN } from '../../../constant'
 
 let cx = classNames.bind(styles)
 class TopImage extends Component {
@@ -10,10 +11,10 @@ class TopImage extends Component {
   }
 
   componentDidMount() {
-    if (PRODUCTION && navigator.userAgent != 'ReactSnap') {
+    if (navigator.userAgent != 'ReactSnap') {
       let { type = 'jpg', url } = this.props
       let img = new Image()
-      let bigImageUrl = `/static/images/${url}/${url}.${type}`
+      let bigImageUrl = `${CDN_DOMAIN}/${url}/${url}.${type}`
 
       img.addEventListener('load', () => {
         this.myRef.current.src = bigImageUrl
@@ -31,7 +32,7 @@ class TopImage extends Component {
       <img
         className={cx('thumb', 'blur')}
         ref={this.myRef}
-        src={require(`../../../assets/images/${url}/${url}-thumb.jpg`)}
+        src={`${CDN_DOMAIN}/${url}/${url}-thumb.jpg`}
         alt={title}
       />
     )

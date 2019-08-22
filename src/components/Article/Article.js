@@ -53,7 +53,15 @@ class Article extends Component {
       return <NotFound />
     }
 
-    let { title, content, description, keywords, url } = this.props.datas
+    let {
+      title,
+      content,
+      description,
+      keywords,
+      url,
+      date,
+      category
+    } = this.props.datas
     let { url: browserUrl } = this.props.match.params
     let isChrome =
       !!window.chrome && (!!window.chrome.webstore || !!window.chrome.runtime)
@@ -69,6 +77,66 @@ class Article extends Component {
           <title>{title}</title>
           <meta name="description" content={description} />
           <meta name="keywords" content={keywords} />
+
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:site" content="@ChildBen" />
+          <meta name="twitter:title" content={title} />
+          <meta name="twitter:description" content={description} />
+          <meta name="twitter:creator" content="@ChildBen" />
+          <meta
+            name="twitter:image:src"
+            content={`https://cdn.childben.com/${url}/${url}.jpg`}
+          />
+
+          <meta property="og:title" content={title} />
+          <meta property="og:type" content="article" />
+          <meta
+            property="og:url"
+            content={`https://www.childben.com/${category}/${url}`}
+          />
+          <meta
+            property="og:image"
+            content={`https://cdn.childben.com/${url}/${url}.jpg`}
+          />
+          <meta property="og:description" content={description} />
+          <meta property="og:site_name" content="ChildBen" />
+          <meta property="article:published_time" content={date} />
+          <meta property="article:modified_time" content={date} />
+          <meta property="fb:admins" content="100031410993377" />
+
+          <script type="application/ld+json">
+            {`
+              {
+                "@context": "https://schema.org",
+                "@type": "BlogPosting",
+                "headline": "${title}",
+                "image": "https://cdn.childben.com/${url}/${url}.jpg",
+                "editor": "Child Ben",
+                "keywords": "${keywords}",
+                "url": "https://www.childben.com/${category}/${url}",
+                "datePublished": "${date}",
+                "dateCreated": "${date}",
+                "dateModified": "${date}",
+                "description": "${description}",
+                "publisher": {
+                  "@type": "Organization",
+                  "name": "Blog Name",
+                  "url": "https://www.childben.com",
+                  "logo": {
+                  	"@type": "ImageObject",
+                    "url": "https://www.childben.com/static/images/android-icon-96x96.png",
+                    "width": 96,
+                    "height": 96
+                  }
+                },
+                "mainEntityOfPage": "https://www.childben.com/${category}/${url}",
+                "author": {
+                  "@type": "Person",
+                  "name": "ChildBen"
+                }
+              }
+          `}
+          </script>
         </Helmet>
       </article>
     )
