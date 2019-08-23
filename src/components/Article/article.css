@@ -20,4 +20,11 @@
 .content {
   font-size: 18px;
   word-wrap: break-word;
+
+  @media screen and (max-width: 812px) {
+    img {
+      max-width: 280px;
+      max-height: 185px;
+    }
+  }
 }
