@@ -10,26 +10,22 @@ const pool = new Pool({
 
 async function generateSitemap() {
   try {
-    const queryStr = `SELECT category, url, modified_time FROM pages WHERE status = 'open' ORDER BY id DESC `
+    const queryStr = `SELECT category, url, date, modified_time FROM pages WHERE status = 'open' ORDER BY id DESC `
     const client = await pool.connect()
     const result = await client.query(queryStr)
     let idMap = []
 
     for (var i = 0; i < result.rows.length; i++) {
-      let { url, category, modified_time } = result.rows[i]
+      let { url, category, date, modified_time } = result.rows[i]
       let item = {
         url: `/${category}/${url}`,
         img: `https://cdn.childben.com/${url}/${url}.jpg`
       }
-      console.log(modified_time)
 
-      if (modified_time) {
-        item = {
-          ...item,
-          lastmod: modified_time
-        }
+      item = {
+        ...item,
+        lastmod: modified_time || date
       }
-      console.log(item)
 
       idMap.push(item)
     }
