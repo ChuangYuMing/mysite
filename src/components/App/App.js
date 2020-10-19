@@ -2,13 +2,11 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { Route } from 'react-router-dom'
-import classNames from 'classnames/bind'
-import styles from './App.css'
+import './App.css'
 import Main from '../Main/Main'
 import { sendTrackEvent } from '../../utils/tracking'
 import debounce from '../../utils/debounce'
 
-let cx = classNames.bind(styles)
 class App extends React.PureComponent {
   constructor(props) {
     super(props)
@@ -29,7 +27,7 @@ class App extends React.PureComponent {
 
     document.addEventListener('scroll', updateMaxDepth)
 
-    window.addEventListener('beforeunload', event => {
+    window.addEventListener('beforeunload', (event) => {
       sendTrackEvent({
         category: 'scroll',
         action: 'scroll_depth',
@@ -58,7 +56,7 @@ function loadGa() {
   document.head.appendChild(script)
 
   window.dataLayer = window.dataLayer || []
-  window.gtag = function() {
+  window.gtag = function () {
     window.dataLayer.push(arguments)
   }
   window.gtag('js', new Date())
@@ -78,7 +76,7 @@ function loadAdSense() {
 
 function performanceTrack() {
   if (PerformanceObserver) {
-    const observer = new PerformanceObserver(list => {
+    const observer = new PerformanceObserver((list) => {
       for (const entry of list.getEntries()) {
         // `name` will be either 'first-paint' or 'first-contentful-paint'.
         const metricName = entry.name
@@ -94,7 +92,7 @@ function performanceTrack() {
     observer.observe({ entryTypes: ['paint'] })
   }
 }
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {}
 }
 export default withRouter(connect(mapStateToProps)(App))

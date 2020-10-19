@@ -11,7 +11,7 @@ process.traceDeprecation = true
 
 module.exports = {
   mode: 'development',
-  devtool: '#cheap-module-eval-source-map',
+  devtool: 'cheap-module-eval-source-map',
   entry: ['@babel/polyfill', 'react-hot-loader/patch', './src/index.js'],
   output: {
     path: path.resolve(__dirname, 'build'),
@@ -28,16 +28,17 @@ module.exports = {
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(), // Enable HMR
-    new webpack.NamedModulesPlugin(),
     new MiniCssExtractPlugin({
       filename: 'css/main.css',
       chunkFilename: 'css/[id].css'
     }),
-    new webpack.optimize.ModuleConcatenationPlugin(),
     new webpack.DefinePlugin({
       PRODUCTION: JSON.stringify(false)
     })
   ],
+  optimization: {
+    namedModules: true
+  },
   module: {
     rules: [
       {

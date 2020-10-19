@@ -5,7 +5,7 @@ const path = require('path')
 const webpack = require('webpack')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const CleanWebpackPlugin = require('clean-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
   .BundleAnalyzerPlugin
@@ -15,7 +15,10 @@ process.traceDeprecation = true
 
 module.exports = {
   mode: 'production',
-  devtool: '#cheap-module-source-map',
+  devtool: 'cheap-module-source-map',
+  stats: {
+    children: false
+  },
   entry: {
     app: ['@babel/polyfill', './src/index.js']
   },
@@ -57,7 +60,7 @@ module.exports = {
   },
   plugins: [
     // new BundleAnalyzerPlugin(),
-    new CleanWebpackPlugin(['build']),
+    new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
       filename: 'static/css/main.[contenthash:8].css',
       chunkFilename: 'static/css/[id].[contenthash:8].css'
@@ -72,11 +75,13 @@ module.exports = {
     new webpack.DefinePlugin({
       PRODUCTION: JSON.stringify(true)
     }),
-    new CopyPlugin([
-      { from: './manifest.json', to: './' },
-      { from: './robots.txt', to: './' },
-      { from: './src/assets/images', to: './static/images' }
-    ])
+    new CopyPlugin({
+      patterns: [
+        { from: './manifest.json', to: './' },
+        { from: './robots.txt', to: './' },
+        { from: './src/assets/images', to: './static/images' }
+      ]
+    })
   ],
   module: {
     rules: [
@@ -111,7 +116,7 @@ module.exports = {
             loader: 'postcss-loader',
             options: {
               ident: 'postcss',
-              plugins: loader => [
+              plugins: (loader) => [
                 require('postcss-global-import')(),
                 require('postcss-import')({
                   path: './src/modules/shared/styles/'
