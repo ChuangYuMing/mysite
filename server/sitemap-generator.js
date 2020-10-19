@@ -1,11 +1,14 @@
-const { createSitemap } = require('sitemap')
+const { SitemapStream, streamToPromise } = require('sitemap')
+const { Readable } = require('stream')
 const fs = require('fs-extra')
 const { Pool } = require('pg')
 require('dotenv').config()
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
-  ssl: true
+  ssl: {
+    rejectUnauthorized: false
+  }
 })
 
 async function generateSitemap() {
@@ -19,7 +22,7 @@ async function generateSitemap() {
       let { url, category, date, modified_time } = result.rows[i]
       let item = {
         url: `/${category}/${url}`,
-        img: `https://cdn.childben.com/${url}/${url}.jpg`
+        img: [{ url: `https://cdn.childben.com/${url}/${url}.jpg` }]
       }
 
       item = {
@@ -30,18 +33,20 @@ async function generateSitemap() {
       idMap.push(item)
     }
 
-    const sitemap = createSitemap({
-      hostname: 'https://www.childben.com',
-      urls: [{ url: '/' }, { url: '/finance/' }, ...idMap]
-    })
+    idMap = [{ url: '/' }, { url: '/finance/' }, ...idMap]
 
-    console.log(sitemap.toXML())
-    fs.outputFileSync('../build/sitemap.xml', sitemap.toXML(), function(err) {
-      if (err) {
-        console.log(err)
-      }
+    const stream = new SitemapStream({ hostname: 'https://www.childben.com' })
+    return streamToPromise(Readable.from(idMap).pipe(stream)).then((data) => {
+      console.log(data.toString())
+      fs.outputFileSync('../build/sitemap.xml', data.toString(), function (
+        err
+      ) {
+        if (err) {
+          console.log(err)
+        }
+      })
+      process.exit()
     })
-    process.exit()
   } catch (e) {
     console.log(e)
   }
