@@ -124,8 +124,8 @@ module.exports = {
                 require('postcss-mixins')(),
                 require('postcss-nested')(),
                 require('postcss-simple-vars')(),
-                require('autoprefixer')()
-                // require('cssnano')()
+                require('autoprefixer')(),
+                require('cssnano')()
               ]
             }
           }
