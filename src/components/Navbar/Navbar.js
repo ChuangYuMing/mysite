@@ -50,6 +50,9 @@ class Navbar extends Component {
             <Link to="/finance" aria-label="Finance">
               Finance
             </Link>
+            <Link to="/politics" aria-label="Politics">
+              Politics
+            </Link>
           </nav>
         </div>
         <div className={cx('mb-wrapper')}>
@@ -76,6 +79,9 @@ class Navbar extends Component {
             <div className={cx('links')} onClick={this.toggleMenu}>
               <Link to="/finance" aria-label="Finance">
                 Finance
+              </Link>
+              <Link to="/politics" aria-label="Politics">
+                Politics
               </Link>
             </div>
           </nav>
