@@ -1,4 +1,5 @@
 @import '../helpers/_variables.css';
+@import './_font.css';
 
 * {
   box-sizing: border-box;
@@ -21,7 +22,7 @@ html {
 } */
 
 body {
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: 'Roboto', 'system-ui', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   line-height: 1.8;
 }
 
