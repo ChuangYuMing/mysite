@@ -12,8 +12,7 @@ class App extends React.PureComponent {
     super(props)
     this.haveload = false
     this.maxScrollDepth = 0
-    this.scrollDepthTrack = this.scrollDepthTrack.bind(this)
-    loadGa()
+    // this.scrollDepthTrack = this.scrollDepthTrack.bind(this)
   }
 
   scrollDepthTrack() {
@@ -27,6 +26,7 @@ class App extends React.PureComponent {
 
     document.addEventListener('scroll', updateMaxDepth)
 
+    // not use beforeunload
     window.addEventListener('beforeunload', (event) => {
       sendTrackEvent({
         category: 'scroll',
@@ -38,28 +38,14 @@ class App extends React.PureComponent {
 
   componentDidMount() {
     if (PRODUCTION && navigator.userAgent != 'ReactSnap') {
-      loadAdSense()
-      performanceTrack()
-      this.scrollDepthTrack()
+      // loadAdSense()
+      // performanceTrack()
+      // this.scrollDepthTrack()
     }
   }
   render() {
     return <Route component={Main} />
   }
-}
-
-function loadGa() {
-  let script = document.createElement('script')
-
-  script.src = 'https://www.googletagmanager.com/gtag/js?id=UA-144731980-1'
-  script.async = true
-  document.head.appendChild(script)
-
-  window.dataLayer = window.dataLayer || []
-  window.gtag = function () {
-    window.dataLayer.push(arguments)
-  }
-  window.gtag('js', new Date())
 }
 
 function loadAdSense() {
