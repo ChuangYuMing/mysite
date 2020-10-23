@@ -12,13 +12,13 @@ class TopImage extends Component {
 
   componentDidMount() {
     if (navigator.userAgent != 'ReactSnap') {
-      let { type = 'jpg', url } = this.props
+      let { type = 'jpg', url, title } = this.props
       let img = new Image()
       let bigImageUrl = `${CDN_DOMAIN}/${url}/${url}.${type}`
 
       img.addEventListener('load', () => {
         this.myRef.current.src = bigImageUrl
-        this.myRef.current.alt = this.props.title
+        this.myRef.current.alt = title
         this.myRef.current.classList.remove(styles.blur)
       })
 

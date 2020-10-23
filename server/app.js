@@ -80,7 +80,7 @@ apiRouter.get('/article', async (req, res) => {
       `SELECT category, url, title, content, description, keywords, date, modified_time, questions FROM pages WHERE url = '${url}' AND status = 'open'`
     )
 
-    const results = { results: result.rows.length !== 0 ? result.rows[0] : {} }
+    const results = { results: result.rows.length !== 0 ? result.rows[0] : {error: 1} }
 
     res.json(results)
     client.release()

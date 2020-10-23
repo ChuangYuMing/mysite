@@ -40,8 +40,12 @@ class Article extends Component {
   }
 
   render() {
-    let { title, content, url } = this.props.datas
+    let { title, content, url, error } = this.props.datas
     let { url: browserUrl } = this.props.match.params
+
+    if (error === 1) {
+      return <NotFound />
+    }
 
     if (url !== browserUrl || this.props.isFetching) {
       return (
@@ -51,17 +55,15 @@ class Article extends Component {
       )
     }
 
-    if (!this.props.isFetching && !this.props.datas.url) {
-      return <NotFound />
-    }
-
     let isChrome =
       !!window.chrome && (!!window.chrome.webstore || !!window.chrome.runtime)
 
     return (
       <article className={cx('wrapper')}>
         <h1 className={cx('title')}>{title}</h1>
-        <TopImage type={isChrome ? 'webp' : 'jpg'} url={url} />
+        <div className={cx('top-image')}>
+          <TopImage type={isChrome ? 'webp' : 'jpg'} url={url} title={title}/>
+        </div>
         <div
           className={cx('content')}
           dangerouslySetInnerHTML={{ __html: content }}

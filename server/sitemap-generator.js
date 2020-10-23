@@ -33,7 +33,14 @@ async function generateSitemap() {
       idMap.push(item)
     }
 
-    idMap = [{ url: '/' }, { url: '/finance/' }, { url: '/politics/' }, ...idMap]
+    const fixRoute = [
+      { url: '/' },
+      { url: '/privacy-policy' },
+      { url: '/terms' },
+      { url: '/finance' },
+      { url: '/politics' }
+    ]
+    idMap = [...fixRoute, ...idMap]
 
     const stream = new SitemapStream({ hostname: 'https://www.childben.com' })
     return streamToPromise(Readable.from(idMap).pipe(stream)).then((data) => {
