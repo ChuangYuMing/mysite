@@ -23,7 +23,7 @@ class Footer extends Component {
             </Link>
           
           <div className={cx('links')}>
-            <Link to="/politics" aria-label="Politics">
+            <Link to="/contact" aria-label="Contact">
               Contact
             </Link>
             <Link to="/privacy-policy" aria-label="Privacy Policy">

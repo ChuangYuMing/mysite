@@ -37,6 +37,7 @@ async function generateSitemap() {
       { url: '/' },
       { url: '/privacy-policy' },
       { url: '/terms' },
+      { url: '/contact' },
       { url: '/finance' },
       { url: '/politics' }
     ]

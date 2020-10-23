@@ -7,6 +7,7 @@ import Article from '../Article/Article'
 // import Aside from '../Aside/Aside'
 import PrivacyPolicy from '../Legal/PrivacyPolicy'
 import Terms from '../Legal/Terms'
+import Contact from '../Legal/Contact'
 import Pages from '../Pages/Pages'
 import { Route, Switch } from 'react-router-dom'
 
@@ -26,6 +27,7 @@ class Main extends Component {
         <div className={cx('container')}>
           <Switch>
             <Route exact path="/" component={Pages} />
+            <Route exact path="/contact" component={Contact} />
             <Route exact path="/terms" component={Terms} />
             <Route exact path="/privacy-policy" component={PrivacyPolicy} />
             <Route exact path="/:category" component={Pages} />
