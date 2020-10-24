@@ -1,8 +1,8 @@
 # stage: 1
 FROM node:10.16.0-alpine as builder
 WORKDIR /usr/app
-COPY package*.json /usr/app/
-RUN npm install --only=production
+COPY package*.json yarn.lock /usr/app/
+RUN yarn install --production
 
 COPY . /usr/app/
 
