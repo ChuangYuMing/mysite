@@ -39,12 +39,16 @@ router.get('/robots.txt', (req, res, next) => {
   res.sendFile(path.resolve(__dirname, `../build/robots.txt`))
 })
 
+router.get('/service-worker.js', (req, res, next) => {
+  res.sendFile(path.resolve(__dirname, `../build/service-worker.js`))
+})
+
 router.get('/:category', (req, res, next) => {
   let { category, url } = req.params
   res.sendFile(
     path.resolve(__dirname, `../build/${category}/index.html`),
     {},
-    err => {
+    (err) => {
       if (err) {
         next()
       }
@@ -58,7 +62,7 @@ router.get('/:category/:url', (req, res, next) => {
   res.sendFile(
     path.resolve(__dirname, `../build/${category}/${url}/index.html`),
     {},
-    err => {
+    (err) => {
       if (err) {
         next()
       }
@@ -80,7 +84,9 @@ apiRouter.get('/article', async (req, res) => {
       `SELECT category, url, title, content, description, keywords, date, modified_time, questions FROM pages WHERE url = '${url}' AND status = 'open'`
     )
 
-    const results = { results: result.rows.length !== 0 ? result.rows[0] : {error: 1} }
+    const results = {
+      results: result.rows.length !== 0 ? result.rows[0] : { error: 1 }
+    }
 
     res.json(results)
     client.release()
