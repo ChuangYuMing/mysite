@@ -2,7 +2,7 @@
   FOR DEVELOPMENT test
 */
 const path = require('path')
-// const autoprefixer = require('autoprefixer')
+const postcssPresetEnv = require('postcss-preset-env')
 const webpack = require('webpack')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
@@ -73,14 +73,14 @@ module.exports = {
             options: {
               ident: 'postcss',
               plugins: (loader) => [
+                postcssPresetEnv(),
                 require('postcss-global-import')(),
                 require('postcss-import')({
                   path: './src/modules/shared/styles/'
                 }),
                 require('postcss-mixins')(),
                 require('postcss-nested')(),
-                require('postcss-simple-vars')(),
-                require('autoprefixer')()
+                require('postcss-simple-vars')()
                 // require('cssnano')(),
               ]
             }

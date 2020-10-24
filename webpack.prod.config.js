@@ -7,6 +7,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
+const postcssPresetEnv = require('postcss-preset-env')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
   .BundleAnalyzerPlugin
 
@@ -115,6 +116,7 @@ module.exports = {
             options: {
               ident: 'postcss',
               plugins: (loader) => [
+                postcssPresetEnv(),
                 require('postcss-global-import')(),
                 require('postcss-import')({
                   path: './src/modules/shared/styles/'
@@ -122,7 +124,6 @@ module.exports = {
                 require('postcss-mixins')(),
                 require('postcss-nested')(),
                 require('postcss-simple-vars')(),
-                require('autoprefixer')(),
                 require('cssnano')()
               ]
             }
