@@ -44,13 +44,13 @@ module.exports = {
           test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
           name: 'react',
           chunks: 'all',
-          priority: 10,
+          priority: 10
         },
         vendor: {
           test: /[\\/]node_modules[\\/]/,
           name: 'vendor',
           chunks: 'all',
-          priority: 9,
+          priority: 9
         }
       }
     }
@@ -76,6 +76,7 @@ module.exports = {
       patterns: [
         { from: './manifest.json', to: './' },
         { from: './robots.txt', to: './' },
+        { from: './src/service-worker.js', to: './' },
         { from: './src/assets/images', to: './static/images' }
       ]
     })

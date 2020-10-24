@@ -72,7 +72,7 @@ module.exports = {
             loader: 'postcss-loader',
             options: {
               ident: 'postcss',
-              plugins: loader => [
+              plugins: (loader) => [
                 require('postcss-global-import')(),
                 require('postcss-import')({
                   path: './src/modules/shared/styles/'
@@ -125,6 +125,6 @@ module.exports = {
       'Access-Control-Allow-Credentials': 'true',
       'Access-Control-Allow-Methods': '*'
     },
-    port: 7777
+    port: 7779
   }
 }
