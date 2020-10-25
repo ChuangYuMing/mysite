@@ -1,5 +1,6 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
+import { CDN_DOMAIN } from '../../../constant'
 
 function MetaTag({ data }) {
   let {
@@ -13,6 +14,8 @@ function MetaTag({ data }) {
     questions
   } = data
   modified_time = modified_time ? modified_time : date
+
+  const bigImageUrl = `${CDN_DOMAIN}/${url}/${url}.webp`
 
   return (
     <Helmet>
@@ -46,6 +49,12 @@ function MetaTag({ data }) {
       <meta property="article:modified_time" content={modified_time} />
       <meta property="fb:admins" content="100031410993377" />
 
+      <link
+        rel="preload"
+        href={bigImageUrl}
+        as="image"
+        type="image/webp"
+      ></link>
       <script type="application/ld+json">
         {`
               {
@@ -89,7 +98,7 @@ function questiosJsonLd(questions) {
     return
   }
 
-  let mainEntity = JSON.parse(questions).map(item => {
+  let mainEntity = JSON.parse(questions).map((item) => {
     let { name, text } = item
     return {
       '@type': 'Question',
