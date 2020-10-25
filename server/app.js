@@ -1,5 +1,6 @@
 require('newrelic')
 const express = require('express')
+const serveStatic = require('serve-static')
 const path = require('path')
 const app = express()
 const cors = require('cors')
@@ -18,58 +19,22 @@ const pool = new Pool({
 
 app.use(express.json())
 app.use(cors())
-
+app.use(
+  serveStatic(path.resolve(__dirname, '../build'), {
+    setHeaders: (res, path) => {
+      if (serveStatic.mime.lookup(path) === 'text/html') {
+        // Custom Cache-Control for HTML files
+        res.setHeader('Cache-Control', 'public, max-age=0')
+      } else {
+        res.setHeader('Cache-Control', 'public, max-age=31536000')
+      }
+    }
+  })
+)
 app.use('/api', apiRouter)
-app.use('/static', express.static('../build/static'))
+
+// for no static file
 app.use('/', router)
-
-router.get('/favicon.ico', (req, res, next) => {
-  res.sendFile(path.resolve(__dirname, `../build/static/images/favicon.ico`))
-})
-
-router.get('/sitemap.xml', (req, res, next) => {
-  res.sendFile(path.resolve(__dirname, `../build/sitemap.xml`))
-})
-
-router.get('/manifest.json', (req, res, next) => {
-  res.sendFile(path.resolve(__dirname, `../build/manifest.json`))
-})
-
-router.get('/robots.txt', (req, res, next) => {
-  res.sendFile(path.resolve(__dirname, `../build/robots.txt`))
-})
-
-router.get('/service-worker.js', (req, res, next) => {
-  res.sendFile(path.resolve(__dirname, `../build/service-worker.js`))
-})
-
-router.get('/:category', (req, res, next) => {
-  let { category, url } = req.params
-  res.sendFile(
-    path.resolve(__dirname, `../build/${category}/index.html`),
-    {},
-    (err) => {
-      if (err) {
-        next()
-      }
-    }
-  )
-})
-
-router.get('/:category/:url', (req, res, next) => {
-  let { category, url } = req.params
-
-  res.sendFile(
-    path.resolve(__dirname, `../build/${category}/${url}/index.html`),
-    {},
-    (err) => {
-      if (err) {
-        next()
-      }
-    }
-  )
-})
-
 router.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../build/index.html'))
 })
