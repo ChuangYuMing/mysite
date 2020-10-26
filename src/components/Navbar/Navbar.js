@@ -42,6 +42,8 @@ class Navbar extends Component {
         <div className={cx('wrapper')}>
           <img
             className={cx('logo')}
+            width="45"
+            height="45"
             src={logo}
             onClick={this.goHome}
             alt="Logo"
@@ -59,6 +61,8 @@ class Navbar extends Component {
           <div className={cx('top')}>
             <img
               className={cx('logo')}
+              width="45"
+              height="45"
               src={logo}
               onClick={this.goHome}
               alt="Logo"

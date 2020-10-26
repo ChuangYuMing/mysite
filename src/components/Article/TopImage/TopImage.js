@@ -31,6 +31,8 @@ class TopImage extends Component {
     return (
       <img
         className={cx('thumb', 'blur')}
+        width="730"
+        height="484"
         ref={this.myRef}
         src={`${CDN_DOMAIN}/${url}/${url}-thumb.jpg`}
         alt={title}

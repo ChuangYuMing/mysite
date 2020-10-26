@@ -15,6 +15,14 @@
 
 .top-image {
   text-align: center;
+  margin: 0 auto;
+  width: 730px;
+  height: 484px;
+
+  @media screen and (max-width: 812px) {
+    width: 280px;
+    height: 185px;
+  }
 }
 
 .title {
