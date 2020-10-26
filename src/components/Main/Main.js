@@ -9,7 +9,7 @@ import PrivacyPolicy from '../Legal/PrivacyPolicy'
 import Terms from '../Legal/Terms'
 import Contact from '../Legal/Contact'
 import Pages from '../Pages/Pages'
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch, Redirect } from 'react-router-dom'
 
 let cx = classNames.bind(styles)
 class Main extends Component {
@@ -26,6 +26,7 @@ class Main extends Component {
         <Navbar />
         <div className={cx('container')}>
           <Switch>
+            <Route exact strict path="/:url*" render={props => <Redirect to={`${props.location.pathname}/`}/>} />
             <Route exact path="/" component={Pages} />
             <Route exact path="/contact" component={Contact} />
             <Route exact path="/terms" component={Terms} />

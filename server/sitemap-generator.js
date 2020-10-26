@@ -21,7 +21,7 @@ async function generateSitemap() {
     for (var i = 0; i < result.rows.length; i++) {
       let { url, category, date, modified_time } = result.rows[i]
       let item = {
-        url: `/${category}/${url}`,
+        url: `/${category}/${url}/`,
         img: [{ url: `https://cdn.childben.com/${url}/${url}.jpg` }]
       }
 
@@ -35,11 +35,11 @@ async function generateSitemap() {
 
     const fixRoute = [
       { url: '/' },
-      { url: '/privacy-policy' },
-      { url: '/terms' },
-      { url: '/contact' },
-      { url: '/finance' },
-      { url: '/politics' }
+      { url: '/privacy-policy/' },
+      { url: '/terms/' },
+      { url: '/contact/' },
+      { url: '/finance/' },
+      { url: '/politics/' }
     ]
     idMap = [...fixRoute, ...idMap]
 
