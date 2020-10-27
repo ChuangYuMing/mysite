@@ -10,33 +10,16 @@ class TopImage extends Component {
     this.myRef = React.createRef()
   }
 
-  componentDidMount() {
-    if (navigator.userAgent != 'ReactSnap') {
-      let { type = 'jpg', url, title } = this.props
-      let img = new Image()
-      let bigImageUrl = `${CDN_DOMAIN}/${url}/${url}.${type}`
-
-      img.addEventListener('load', () => {
-        this.myRef.current.src = bigImageUrl
-        this.myRef.current.alt = title
-        this.myRef.current.classList.remove(styles.blur)
-      })
-
-      img.src = bigImageUrl
-    }
-  }
-
   render() {
     let { url, title } = this.props
+    let webp = `${CDN_DOMAIN}/${url}/${url}.webp`
+    let jpg = `${CDN_DOMAIN}/${url}/${url}.jpg`
+
     return (
-      <img
-        className={cx('thumb', 'blur')}
-        width="730"
-        height="484"
-        ref={this.myRef}
-        src={`${CDN_DOMAIN}/${url}/${url}-thumb.jpg`}
-        alt={title}
-      />
+      <picture>
+        <source srcSet={webp} type="image/webp" />
+        <img width="730" height="484"src={jpg} alt={title} />
+      </picture>
     )
   }
 }
