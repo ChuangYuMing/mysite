@@ -54,6 +54,8 @@ app.use(
 )
 app.use(helmet.noSniff())
 app.use(helmet.hidePoweredBy())
+app.use(helmet.xssFilter())
+app.use(helmet.frameguard())
 app.use(cors())
 app.use(
   serveStatic(path.resolve(__dirname, '../build'), {
