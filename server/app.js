@@ -28,8 +28,7 @@ app.use(
         '*.google-analytics.com',
         '*.googletagmanager.com',
         '*.googleapis.com',
-        "'nonce-sw'",
-        "'nonce-ga'"
+        "'unsafe-inline'"
       ],
       imgSrc: ['*', 'data:'],
       connectSrc: [
