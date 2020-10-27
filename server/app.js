@@ -4,7 +4,8 @@ const serveStatic = require('serve-static')
 const path = require('path')
 const app = express()
 const cors = require('cors')
-const port = process.env.PORT || 3000
+const helmet = require('helmet')
+const port = process.env.PORT || 3002
 const { Pool } = require('pg')
 require('dotenv').config()
 let apiRouter = express.Router()
@@ -18,6 +19,42 @@ const pool = new Pool({
 })
 
 app.use(express.json())
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: ["'self'", '*.childben.com'],
+      scriptSrc: [
+        "'self'",
+        '*.google-analytics.com',
+        '*.googletagmanager.com',
+        '*.googleapis.com',
+        "'nonce-sw'",
+        "'nonce-ga'"
+      ],
+      imgSrc: ['*', 'data:'],
+      connectSrc: [
+        "'self'",
+        '*.google-analytics.com',
+        '*.googletagmanager.com',
+        '*.doubleclick.net',
+        '*.googleapis.com',
+        '*.childben.com',
+        '*.google.com'
+      ],
+      fontSrc: ['fonts.gstatic.com'],
+      objectSrc: ["'none'"],
+      styleSrc: ["'self'", '*.childben.com', "'unsafe-inline'"]
+    }
+  })
+)
+app.use(
+  helmet.hsts({
+    maxAge: 86400,
+    includeSubDomains: true
+  })
+)
+app.use(helmet.noSniff())
+app.use(helmet.hidePoweredBy())
 app.use(cors())
 app.use(
   serveStatic(path.resolve(__dirname, '../build'), {

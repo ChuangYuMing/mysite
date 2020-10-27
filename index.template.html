@@ -73,7 +73,7 @@
     <link rel="manifest" href="/manifest.json?20201026" />
     <title>ChildBen</title>
 
-    <script>
+    <script nonce="sw">
       // Check that service workers are supported
       if ('serviceWorker' in navigator && navigator.userAgent != 'ReactSnap') {
         // Use the window load event to keep the page load performant
@@ -88,7 +88,7 @@
       async
       src="https://www.googletagmanager.com/gtag/js?id=UA-144731980-1"
     ></script>
-    <script>
+    <script nonce="ga">
       window.dataLayer = window.dataLayer || []
       function gtag() {
         dataLayer.push(arguments)
