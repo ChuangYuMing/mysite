@@ -18,7 +18,7 @@ class TopImage extends Component {
     return (
       <picture>
         <source srcSet={webp} type="image/webp" />
-        <img width="730" height="484"src={jpg} alt={title} />
+        <img className={cx("top-image")} width="730" height="484"src={jpg} alt={title} />
       </picture>
     )
   }
