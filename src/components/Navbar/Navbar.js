@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import styles from './navbar.css'
 import classNames from 'classnames/bind'
 import logo from '../../assets/images/logo.png'
@@ -6,93 +6,78 @@ import { Link, withRouter } from 'react-router-dom'
 import MenuBtn from './MenuBtn/MenuBtn'
 
 let cx = classNames.bind(styles)
-class Navbar extends Component {
-  constructor() {
-    super()
-    this.state = {
-      openMenu: false
-    }
-    this.goHome = this.goHome.bind(this)
-    this.toggleMenu = this.toggleMenu.bind(this)
+
+function Navbar(props) {
+  const [openMenu, setOpenMenu] = useState(false);
+
+  function goHome() {
+    props.history.push('/')
   }
 
-  goHome() {
-    this.props.history.push('/')
+  function toggleMenu() {
+    setOpenMenu(!openMenu)
   }
 
-  toggleMenu() {
-    this.setState({
-      openMenu: !this.state.openMenu
-    })
-  }
-
-  componentDidMount() {}
-  componentWillUnmount() {}
-
-  render() {
-    let { openMenu } = this.state
-    let menucx = cx({
-      category: true,
-      open: openMenu,
-      close: !openMenu
-    })
-
-    return (
-      <>
-        <div className={cx('wrapper')}>
+  let menucx = cx({
+    category: true,
+    open: openMenu,
+    close: !openMenu
+  })
+  return (
+    <>
+      <div className={cx('wrapper')}>
+        <img
+          className={cx('logo')}
+          width="45"
+          height="45"
+          src={logo}
+          onClick={goHome}
+          alt="Logo"
+        />
+        <nav className={cx('category')}>
+          <Link to="/finance" aria-label="Finance">
+            Finance
+          </Link>
+          <Link to="/politics" aria-label="Politics">
+            Politics
+          </Link>
+        </nav>
+      </div>
+      <div className={cx('mb-wrapper')}>
+        <div className={cx('top')}>
           <img
             className={cx('logo')}
             width="45"
             height="45"
             src={logo}
-            onClick={this.goHome}
+            onClick={goHome}
             alt="Logo"
           />
-          <nav className={cx('category')}>
+          <span className={cx('title')}>ChildBen</span>
+          <MenuBtn
+            className={cx('menu')}
+            onClick={toggleMenu}
+            color="#000"
+          />
+        </div>
+        <nav className={menucx}>
+          <MenuBtn
+            className={cx('menu2')}
+            onClick={toggleMenu}
+            color="#fff"
+          />
+          <div className={cx('links')} onClick={toggleMenu}>
             <Link to="/finance" aria-label="Finance">
               Finance
             </Link>
             <Link to="/politics" aria-label="Politics">
               Politics
             </Link>
-          </nav>
-        </div>
-        <div className={cx('mb-wrapper')}>
-          <div className={cx('top')}>
-            <img
-              className={cx('logo')}
-              width="45"
-              height="45"
-              src={logo}
-              onClick={this.goHome}
-              alt="Logo"
-            />
-            <span className={cx('title')}>ChildBen</span>
-            <MenuBtn
-              className={cx('menu')}
-              onClick={this.toggleMenu}
-              color="#000"
-            />
           </div>
-          <nav className={menucx}>
-            <MenuBtn
-              className={cx('menu2')}
-              onClick={this.toggleMenu}
-              color="#fff"
-            />
-            <div className={cx('links')} onClick={this.toggleMenu}>
-              <Link to="/finance" aria-label="Finance">
-                Finance
-              </Link>
-              <Link to="/politics" aria-label="Politics">
-                Politics
-              </Link>
-            </div>
-          </nav>
-        </div>
-      </>
-    )
-  }
+        </nav>
+      </div>
+    </>
+  )
 }
 
 export default withRouter(Navbar)

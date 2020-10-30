@@ -21,9 +21,12 @@ const store = createStore(
   )
 )
 
-window.snapSaveState = () => ({
-  __PRELOADED_STATE__: store.getState()
-})
+window.snapSaveState = () => {
+  document.querySelector('#root').setAttribute('data-server-rendered', 'true')
+  return {
+    __PRELOADED_STATE__: store.getState()
+  }
+}
 
 epicMiddleware.run(rootEpic)
 
