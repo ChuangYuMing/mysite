@@ -39,6 +39,7 @@ async function generateSitemap() {
       { url: '/terms/' },
       { url: '/contact/' },
       { url: '/finance/' },
+      { url: '/history/' },
       { url: '/politics/' }
     ]
     idMap = [...fixRoute, ...idMap]

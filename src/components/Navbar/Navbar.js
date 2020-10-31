@@ -8,7 +8,7 @@ import MenuBtn from './MenuBtn/MenuBtn'
 let cx = classNames.bind(styles)
 
 function Navbar(props) {
-  const [openMenu, setOpenMenu] = useState(false);
+  const [openMenu, setOpenMenu] = useState(false)
 
   function goHome() {
     props.history.push('/')
@@ -41,6 +41,9 @@ function Navbar(props) {
           <Link to="/politics" aria-label="Politics">
             Politics
           </Link>
+          <Link to="/history" aria-label="History">
+            History
+          </Link>
         </nav>
       </div>
       <div className={cx('mb-wrapper')}>
@@ -54,24 +57,19 @@ function Navbar(props) {
             alt="Logo"
           />
           <span className={cx('title')}>ChildBen</span>
-          <MenuBtn
-            className={cx('menu')}
-            onClick={toggleMenu}
-            color="#000"
-          />
+          <MenuBtn className={cx('menu')} onClick={toggleMenu} color="#000" />
         </div>
         <nav className={menucx}>
-          <MenuBtn
-            className={cx('menu2')}
-            onClick={toggleMenu}
-            color="#fff"
-          />
+          <MenuBtn className={cx('menu2')} onClick={toggleMenu} color="#fff" />
           <div className={cx('links')} onClick={toggleMenu}>
             <Link to="/finance" aria-label="Finance">
               Finance
             </Link>
             <Link to="/politics" aria-label="Politics">
               Politics
+            </Link>
+            <Link to="/history" aria-label="History">
+              History
             </Link>
           </div>
         </nav>
