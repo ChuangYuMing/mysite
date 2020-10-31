@@ -17,11 +17,8 @@ function Pages(props) {
     let { pages } = props
     if (pages.length === 0) {
       props.getPagesAsync(category)
-      sendPageView(category)
-      return props.clearPages()
     }
 
-    props.getPagesAsync(category)
     sendPageView(category)
 
     return props.clearPages()
@@ -37,7 +34,7 @@ function Pages(props) {
     )
   }
 
-  let rows = pages.map(item => {
+  let rows = pages.map((item) => {
     return (
       <div className={cx('item')} key={item.title}>
         <img
@@ -54,18 +51,14 @@ function Pages(props) {
       <div className={cx('items')}>{rows}</div>
       <Helmet>
         <title>ChildBen</title>
-        <meta
-          name="description"
-          content="The blog about everything you want"
-        />
+        <meta name="description" content="The blog about everything you want" />
       </Helmet>
     </div>
   )
 }
 
-
 export default connect(
-  state => ({
+  (state) => ({
     pages: state.pages.datas,
     isFetching: state.pages.isFetching
   }),
