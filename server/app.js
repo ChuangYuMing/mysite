@@ -60,12 +60,12 @@ app.use(cors())
 app.use(
   serveStatic(path.resolve(__dirname, '../build'), {
     setHeaders: (res, path) => {
-      if (serveStatic.mime.lookup(path) === 'text/html') {
-        // Custom Cache-Control for HTML files
-        res.setHeader('Cache-Control', 'public, max-age=0')
-      } else {
-        res.setHeader('Cache-Control', 'public, max-age=31536000')
-      }
+      res.setHeader('Cache-Control', 'public, max-age=7776000')
+      // if (serveStatic.mime.lookup(path) === 'text/html') {
+      //   res.setHeader('Cache-Control', 'public, max-age=0')
+      // } else {
+      //   res.setHeader('Cache-Control', 'public, max-age=31536000')
+      // }
     }
   })
 )
