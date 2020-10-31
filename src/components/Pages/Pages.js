@@ -21,7 +21,9 @@ function Pages(props) {
 
     sendPageView(category)
 
-    return props.clearPages()
+    return () => {
+      props.clearPages()
+    }
   }, [category])
 
   let pages = props.pages
