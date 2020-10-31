@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { useEffect } from 'react'
 import styles from './pages.css'
 import classNames from 'classnames/bind'
 import { connect } from 'react-redux'
@@ -11,78 +11,58 @@ import { CDN_DOMAIN } from '../../constant'
 
 let cx = classNames.bind(styles)
 
-class Pages extends Component {
-  constructor(props) {
-    super(props)
-    this.getPages = this.getPages.bind(this)
-  }
-
-  getPages(category) {
-    this.props.getPagesAsync(category)
-  }
-
-  componentDidUpdate(prevProps) {
-    let category = this.props.match.params.category
-    let preCategory = prevProps.match.params.category
-
-    if (category !== preCategory) {
-      this.getPages(category)
-      sendPageView(category)
-    }
-  }
-
-  componentWillUnmount() {
-    this.props.clearPages()
-  }
-
-  componentDidMount() {
-    let { category } = this.props.match.params
-    let { pages } = this.props
-
+function Pages(props) {
+  let { category } = props.match.params
+  useEffect(() => {
+    let { pages } = props
     if (pages.length === 0) {
-      this.getPages(category)
+      props.getPagesAsync(category)
+      sendPageView(category)
+      return props.clearPages()
     }
 
+    props.getPagesAsync(category)
     sendPageView(category)
-  }
 
-  render() {
-    let pages = this.props.pages
+    return props.clearPages()
+  }, [category])
 
-    if (!pages || this.props.isFetching) {
-      return (
-        <article className={cx('wrapper')}>
-          <LoadingBtn />
-        </article>
-      )
-    }
+  let pages = props.pages
 
-    let rows = pages.map(item => {
-      return (
-        <div className={cx('item')} key={item.title}>
-          <img
-            src={`${CDN_DOMAIN}/${item.url}/${item.url}-thumb.jpg`}
-            alt={item.title}
-          />
-          <Link to={`/${item.category}/${item.url}`}>{item.title}</Link>
-        </div>
-      )
-    })
-
+  if (!pages || props.isFetching) {
     return (
-      <div className={cx('wrapper')}>
-        <div className={cx('items')}>{rows}</div>
-        <Helmet>
-          <title>ChildBen</title>
-          <meta
-            name="description"
-            content="The blog about everything you want"
-          />
-        </Helmet>
-      </div>
+      <article className={cx('wrapper')}>
+        <LoadingBtn />
+      </article>
     )
   }
+
+  let rows = pages.map(item => {
+    return (
+      <div className={cx('item')} key={item.title}>
+        <img
+          src={`${CDN_DOMAIN}/${item.url}/${item.url}-thumb.jpg`}
+          alt={item.title}
+        />
+        <Link to={`/${item.category}/${item.url}`}>{item.title}</Link>
+      </div>
+    )
+  })
+
+  return (
+    <div className={cx('wrapper')}>
+      <div className={cx('items')}>{rows}</div>
+      <Helmet>
+        <title>ChildBen</title>
+        <meta
+          name="description"
+          content="The blog about everything you want"
+        />
+      </Helmet>
+    </div>
+  )
 }
+
 
 export default connect(
   state => ({

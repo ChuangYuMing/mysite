@@ -5,20 +5,14 @@ import { store } from 'store/index.js'
 import { hot } from 'react-hot-loader'
 import App from '../App/App'
 
-class AppProvider extends React.Component {
-  constructor() {
-    super()
-  }
-
-  render() {
-    return (
-      <Provider store={store}>
-        <Router>
-          <Route component={App} />
-        </Router>
-      </Provider>
-    )
-  }
+function AppProvider() {
+  return (
+    <Provider store={store}>
+      <Router>
+        <Route component={App} />
+      </Router>
+    </Provider>
+  )
 }
 
 export default hot(module)(AppProvider)
