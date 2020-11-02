@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './pages.css'
 import classNames from 'classnames/bind'
 import { connect } from 'react-redux'
@@ -12,11 +12,16 @@ import { CDN_DOMAIN } from '../../constant'
 let cx = classNames.bind(styles)
 
 function Pages(props) {
+  // 避免category切換未取的資料
+  const [haveGetPages, setHaveGetPages] = useState(false)
+
   let { category } = props.match.params
   useEffect(() => {
     let { pages } = props
-    if (pages.length === 0) {
+
+    if (pages.length === 0 || haveGetPages) {
       props.getPagesAsync(category)
+      setHaveGetPages(true)
     }
 
     sendPageView(category)
