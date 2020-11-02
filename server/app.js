@@ -73,6 +73,13 @@ app.use('/api', apiRouter)
 
 // for no static file
 app.use('/', router)
+router.get('/heartbeat', (req, res) => {
+  res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
+  res.header('Expires', '-1');
+  res.header('Pragma', 'no-cache');
+  return res.send('heartbeat');
+})
+
 router.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../build/index.html'))
 })
