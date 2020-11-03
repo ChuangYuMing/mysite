@@ -103,6 +103,8 @@
     "prerender": "react-snap",
     "sitemap": "cd server && node sitemap-generator.js",
     "test-bulid": "http-server ./build -p 9000",
+    "purgeMain": "node -e 'require(\"./bin/purge.js\").purgeMain()'",
+    "purgeAll": "node -e 'require(\"./bin/purge.js\").purgeAll()'",
     "deploy": "yarn build && yarn prerender && yarn sitemap && heroku container:login && heroku container:push web && heroku container:release web && docker image prune -f"
   },
   "author": "",
