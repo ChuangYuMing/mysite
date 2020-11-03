@@ -12,18 +12,9 @@ import { CDN_DOMAIN } from '../../constant'
 let cx = classNames.bind(styles)
 
 function Pages(props) {
-  // 避免category切換未取的資料
-  const [haveGetPages, setHaveGetPages] = useState(false)
-
   let { category } = props.match.params
   useEffect(() => {
-    let { pages } = props
-
-    if (pages.length === 0 || haveGetPages) {
-      props.getPagesAsync(category)
-      setHaveGetPages(true)
-    }
-
+    props.getPagesAsync(category)
     sendPageView(category)
 
     return () => {
