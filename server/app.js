@@ -60,7 +60,9 @@ app.use(cors())
 app.use(
   serveStatic(path.resolve(__dirname, '../build'), {
     setHeaders: (res, path) => {
+      // console.log(path);
       res.setHeader('Cache-Control', 'public, max-age=7776000')
+      res.setHeader('Content-Encoding', 'br')
       // if (serveStatic.mime.lookup(path) === 'text/html') {
       //   res.setHeader('Cache-Control', 'public, max-age=0')
       // } else {

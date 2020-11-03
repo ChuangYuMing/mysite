@@ -53,6 +53,7 @@
     "babel-loader": "^8.1.0",
     "babel-plugin-transform-async-to-generator": "~6.24.1",
     "babel-preset-react": "6.24.1",
+    "brotli": "^1.3.2",
     "clean-webpack-plugin": "3.0.0",
     "copy-webpack-plugin": "^6.2.1",
     "css-loader": "5.0.0",
@@ -105,8 +106,10 @@
     "test-bulid": "http-server ./build -p 9000",
     "purgeMain": "node -e 'require(\"./bin/purge.js\").purgeMain()'",
     "purgeAll": "node -e 'require(\"./bin/purge.js\").purgeAll()'",
-    "deploy": "yarn build && yarn prerender && yarn sitemap && heroku container:login && heroku container:push web && heroku container:release web && docker image prune -f"
+    "compress": "node ./bin/compress.js",
+    "build-compress": "yarn build && yarn compress",
+    "deploy": "yarn build && yarn prerender && yarn sitemap && yarn compress && heroku container:login && heroku container:push web && heroku container:release web && docker image prune -f"
   },
-  "author": "",
+  "author": "childben",
   "license": "ISC"
 }
