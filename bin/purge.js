@@ -19,15 +19,23 @@ const instance = axios.create({
   }
 })
 
-function purgeMain() {
-  const parameter = {
+function purgeUrl() {
+  const url = process.argv[1]
+  let parameter = {
     files: ['https://www.childben.com/', 'https://www.childben.com']
   }
+
+  if (url) {
+    parameter = {
+      files: [url]
+    }
+  }
+
   return instance.post('/', JSON.stringify(parameter)).then((res) => {
     if (res.data.success) {
-      console.log(COLOR.done, 'purgeMain OK');
+      console.log(COLOR.done, 'purgeUrl OK');
     } else {
-      console.log(COLOR.error, 'purgeMain Error');
+      console.log(COLOR.error, 'purgeUrl Error');
     }
 
     return res
@@ -49,5 +57,5 @@ function purgeAll() {
   })
 }
 
-module.exports.purgeMain = purgeMain
+module.exports.purgeUrl = purgeUrl
 module.exports.purgeAll = purgeAll

@@ -105,7 +105,7 @@
     "prerender": "react-snap",
     "sitemap": "cd server && node sitemap-generator.js",
     "test-bulid": "http-server ./build -p 9000",
-    "purgeMain": "node -e 'require(\"./bin/purge.js\").purgeMain()'",
+    "purgeUrl": "node -e 'require(\"./bin/purge.js\").purgeUrl()' ${2}",
     "purgeAll": "node -e 'require(\"./bin/purge.js\").purgeAll()'",
     "compress": "node ./bin/compress.js",
     "deploy": "yarn build && yarn prerender && yarn sitemap && yarn compress && heroku container:login && heroku container:push web && heroku container:release web && docker image prune -f"
