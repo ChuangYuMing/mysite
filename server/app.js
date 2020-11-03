@@ -63,12 +63,14 @@ app.use(
       if (process.env.NODE_ENV === 'production') {
         res.setHeader('Content-Encoding', 'br')
       }
-      res.setHeader('Cache-Control', 'public, max-age=7776000')
-      // if (serveStatic.mime.lookup(path) === 'text/html') {
-      //   res.setHeader('Cache-Control', 'public, max-age=0')
-      // } else {
-      //   res.setHeader('Cache-Control', 'public, max-age=31536000')
-      // }
+
+      const noCacheList = ['sitemap.xml']
+      const isNoCache = noCacheList.some((item) => (path.includes(item)))
+      if (isNoCache) {
+        res.setHeader('Cache-Control', 'public, max-age=0')
+      } else {
+        res.setHeader('Cache-Control', 'public, max-age=7776000')
+      }
     }
   })
 )
