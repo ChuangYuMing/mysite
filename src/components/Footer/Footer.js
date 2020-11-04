@@ -14,13 +14,13 @@ function Footer() {
           </Link>
         
         <div className={cx('links')}>
-          <Link to="/contact" aria-label="Contact">
+          <Link to="/contact/" aria-label="Contact">
             Contact
           </Link>
-          <Link to="/privacy-policy" aria-label="Privacy Policy">
+          <Link to="/privacy-policy/" aria-label="Privacy Policy">
             Privacy Policy
           </Link>
-          <Link to="/terms" aria-label="Terms">
+          <Link to="/terms/" aria-label="Terms">
             Terms & Conditions
           </Link>
         </div>

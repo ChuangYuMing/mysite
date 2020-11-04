@@ -35,13 +35,13 @@ function Navbar(props) {
           alt="Logo"
         />
         <nav className={cx('category')}>
-          <Link to="/finance" aria-label="Finance">
+          <Link to="/finance/" aria-label="Finance">
             Finance
           </Link>
-          <Link to="/politics" aria-label="Politics">
+          <Link to="/politics/" aria-label="Politics">
             Politics
           </Link>
-          <Link to="/history" aria-label="History">
+          <Link to="/history/" aria-label="History">
             History
           </Link>
         </nav>
@@ -62,13 +62,13 @@ function Navbar(props) {
         <nav className={menucx}>
           <MenuBtn className={cx('menu2')} onClick={toggleMenu} color="#fff" />
           <div className={cx('links')} onClick={toggleMenu}>
-            <Link to="/finance" aria-label="Finance">
+            <Link to="/finance/" aria-label="Finance">
               Finance
             </Link>
-            <Link to="/politics" aria-label="Politics">
+            <Link to="/politics/" aria-label="Politics">
               Politics
             </Link>
-            <Link to="/history" aria-label="History">
+            <Link to="/history/" aria-label="History">
               History
             </Link>
           </div>
