@@ -12,7 +12,7 @@ function Contact() {
 
   return (
     <div className={cx('wrapper')}>
-      <h1>Hi, this is a blog which is talking about our life and history.</h1>
+      <h1>Hi, ChildBen is the world's leading source of financial content on the web, ranging from market news to retirement strategies, investing, and trading.</h1>
       <h2>If you have any questions, just contact me!</h2>
       <address>
         <a href="mailto:childben28@gmail.com">childben28@gmail.com</a>
