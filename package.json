@@ -93,7 +93,8 @@
   },
   "reactSnap": {
     "inlineCss": true,
-    "cacheAjaxRequests": false
+    "cacheAjaxRequests": false,
+    "concurrency": 10
   },
   "scripts": {
     "test": "jest",
@@ -107,6 +108,7 @@
     "test-bulid": "http-server ./build -p 9000",
     "purgeUrl": "node -e 'require(\"./bin/purge.js\").purgeUrl()' ${2}",
     "purgeAll": "node -e 'require(\"./bin/purge.js\").purgeAll()'",
+    "purgeCategory": "node -e 'require(\"./bin/purge.js\").purgeCategory()'",
     "compress": "node ./bin/compress.js",
     "deploy": "yarn build && yarn prerender && yarn sitemap && yarn compress && heroku container:login && heroku container:push web && heroku container:release web && docker image prune -f"
   },
