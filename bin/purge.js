@@ -1,5 +1,5 @@
 const axios = require('axios')
-const querystring = require('querystring');
+const querystring = require('querystring')
 require('dotenv').config({ path: '.client_secret' })
 const { CLOUDFLARE_TOKEN } = process.env
 const COLOR = {
@@ -33,9 +33,35 @@ function purgeUrl() {
 
   return instance.post('/', JSON.stringify(parameter)).then((res) => {
     if (res.data.success) {
-      console.log(COLOR.done, 'purgeUrl OK');
+      console.log(COLOR.done, 'purgeUrl OK')
     } else {
-      console.log(COLOR.error, 'purgeUrl Error');
+      console.log(COLOR.error, 'purgeUrl Error')
+    }
+
+    return res
+  })
+}
+
+function purgeCategory() {
+  let parameter = {
+    files: [
+      'https://www.childben.com/',
+      'https://www.childben.com',
+      'https://www.childben.com/finance/',
+      'https://www.childben.com/politics/',
+      'https://www.childben.com/history/',
+      'https://www.childben.com/api/pages/all',
+      'https://www.childben.com/api/pages/finance',
+      'https://www.childben.com/api/pages/politics',
+      'https://www.childben.com/api/pages/history'
+    ]
+  }
+
+  return instance.post('/', JSON.stringify(parameter)).then((res) => {
+    if (res.data.success) {
+      console.log(COLOR.done, 'purgeUrl OK')
+    } else {
+      console.log(COLOR.error, 'purgeUrl Error')
     }
 
     return res
@@ -48,9 +74,9 @@ function purgeAll() {
   }
   return instance.post('/', JSON.stringify(parameter)).then((res) => {
     if (res.data.success) {
-      console.log(COLOR.done, 'purgeAll OK');
+      console.log(COLOR.done, 'purgeAll OK')
     } else {
-      console.log(COLOR.error, 'purgeAll Error');
+      console.log(COLOR.error, 'purgeAll Error')
     }
 
     return res
@@ -59,3 +85,4 @@ function purgeAll() {
 
 module.exports.purgeUrl = purgeUrl
 module.exports.purgeAll = purgeAll
+module.exports.purgeCategory = purgeCategory
