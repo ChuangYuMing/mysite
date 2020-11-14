@@ -35,10 +35,11 @@ async function generateSitemap() {
 
     const fixRoute = [
       { url: '/' },
-      { url: '/privacy-policy/' },
-      { url: '/terms/' },
-      { url: '/contact/' },
       { url: '/finance/' },
+      { url: '/economics/' },
+      { url: '/investing/' },
+      { url: '/career/' },
+      { url: '/trading/' },
       { url: '/history/' },
       { url: '/politics/' }
     ]

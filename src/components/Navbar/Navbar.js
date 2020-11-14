@@ -23,6 +23,32 @@ function Navbar(props) {
     open: openMenu,
     close: !openMenu
   })
+
+  const Links = (
+    <>
+      <Link to="/finance/" aria-label="Finance">
+        Finance
+      </Link>
+      <Link to="/economics/" aria-label="Economics">
+        Economics
+      </Link>
+      <Link to="/investing/" aria-label="Investing">
+        Investing
+      </Link>
+      <Link to="/career/" aria-label="Career">
+        Career
+      </Link>
+      <Link to="/trading/" aria-label="Trading">
+        Trading
+      </Link>
+      <Link to="/politics/" aria-label="Politics">
+        Politics
+      </Link>
+      <Link to="/history/" aria-label="History">
+        History
+      </Link>
+    </>
+  )
   return (
     <>
       <div className={cx('wrapper')}>
@@ -34,17 +60,7 @@ function Navbar(props) {
           onClick={goHome}
           alt="Logo"
         />
-        <nav className={cx('category')}>
-          <Link to="/finance/" aria-label="Finance">
-            Finance
-          </Link>
-          <Link to="/politics/" aria-label="Politics">
-            Politics
-          </Link>
-          <Link to="/history/" aria-label="History">
-            History
-          </Link>
-        </nav>
+        <nav className={cx('category')}>{Links}</nav>
       </div>
       <div className={cx('mb-wrapper')}>
         <div className={cx('top')}>
@@ -62,15 +78,7 @@ function Navbar(props) {
         <nav className={menucx}>
           <MenuBtn className={cx('menu2')} onClick={toggleMenu} color="#fff" />
           <div className={cx('links')} onClick={toggleMenu}>
-            <Link to="/finance/" aria-label="Finance">
-              Finance
-            </Link>
-            <Link to="/politics/" aria-label="Politics">
-              Politics
-            </Link>
-            <Link to="/history/" aria-label="History">
-              History
-            </Link>
+            {Links}
           </div>
         </nav>
       </div>
