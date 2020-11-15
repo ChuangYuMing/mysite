@@ -12,6 +12,11 @@
     margin: 0;
     text-align: center;
   }
+
+  ul {
+    padding-left: 20px;
+    list-style-type: disc;
+  }
 }
 
 .top-image {
