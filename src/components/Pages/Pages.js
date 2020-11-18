@@ -12,19 +12,22 @@ import { CDN_DOMAIN } from '../../constant'
 let cx = classNames.bind(styles)
 
 function Pages(props) {
+  let pages = props.pages
   let { category } = props.match.params
-  useEffect(() => {
-    props.getPagesAsync(category)
-    sendPageView(category)
+  const [firstRender, setFirstRender] = useState(true)
 
+  useEffect(() => {
+    if (!firstRender || pages.length === 0) {
+      props.getPagesAsync(category)
+    }
+    sendPageView(category)
+    setFirstRender(false)
     return () => {
       props.clearPages()
     }
   }, [category])
 
-  let pages = props.pages
-
-  if (!pages || props.isFetching) {
+  if (pages.length === 0 || props.isFetching) {
     return (
       <article className={cx('wrapper')}>
         <LoadingBtn />
@@ -49,7 +52,10 @@ function Pages(props) {
       <div className={cx('items')}>{rows}</div>
       <Helmet>
         <title>ChildBen</title>
-        <meta name="description" content="ChildBen is the world's leading source of financial content on the web, ranging from market news to retirement strategies, investing, and trading." />
+        <meta
+          name="description"
+          content="ChildBen is the world's leading source of financial content on the web, ranging from market news to retirement strategies, investing, and trading."
+        />
       </Helmet>
     </div>
   )
