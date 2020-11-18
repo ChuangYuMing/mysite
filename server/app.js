@@ -59,15 +59,15 @@ app.use(helmet.frameguard())
 app.use(cors())
 app.use(
   serveStatic(path.resolve(__dirname, '../build'), {
-    setHeaders: (res, path) => {
+    setHeaders: (res, path, stat) => {
       if (process.env.NODE_ENV === 'production') {
         res.setHeader('Content-Encoding', 'br')
       }
 
-      const noCacheList = ['sitemap.xml']
-      const isNoCache = noCacheList.some((item) => (path.includes(item)))
+      const noCacheList = ['build/index.html', 'sitemap.xml']
+      const isNoCache = noCacheList.some((item) => path.includes(item))
       if (isNoCache) {
-        res.setHeader('Cache-Control', 'public, max-age=0')
+        res.setHeader('Cache-Control', 'no-cache')
       } else {
         res.setHeader('Cache-Control', 'public, max-age=7776000')
       }
@@ -79,10 +79,10 @@ app.use('/api', apiRouter)
 // for no static file
 app.use('/', router)
 router.get('/heartbeat', (req, res) => {
-  res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
-  res.header('Expires', '-1');
-  res.header('Pragma', 'no-cache');
-  return res.send('heartbeat');
+  res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate')
+  res.header('Expires', '-1')
+  res.header('Pragma', 'no-cache')
+  return res.send('heartbeat')
 })
 
 router.get('*', (req, res) => {
