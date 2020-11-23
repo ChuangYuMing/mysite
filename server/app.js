@@ -86,6 +86,9 @@ router.get('/heartbeat', (req, res) => {
 })
 
 router.get('*', (req, res) => {
+  if (process.env.NODE_ENV === 'production') {
+    res.header('Content-Encoding', 'br')
+  }
   res.sendFile(path.resolve(__dirname, '../build/index.html'))
 })
 
