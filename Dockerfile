@@ -1,5 +1,5 @@
 # stage: 1
-FROM node:10.16.0-alpine as builder
+FROM node:14.15.1-alpine as builder
 WORKDIR /usr/app
 COPY package*.json yarn.lock /usr/app/
 RUN yarn install --production
