@@ -9,21 +9,32 @@ html {
   font-size: $base-font-size;
 }
 
-/* :global {
-  #root {
-    height: 100%;
-    > div {
-      height: 100%;
-    }
-  }
-}
-* {
-  user-select: none;
-} */
-
 body {
   font-family: 'Roboto', 'system-ui', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   line-height: 1.8;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  color: #2d2d2d;
+  font-weight: bold;
+  margin: 0 0 1.375rem 0;
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+h2 {
+  margin-top: 3rem;
+  font-size: 1.7rem;
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: 1.75rem;
 }
 
 table {
@@ -45,23 +56,10 @@ ul {
   padding: 0;
 }
 
-a {
-  text-decoration: none;
+li {
+  margin-bottom: 1rem;
 }
 
-:global {
-  .sticky-table-x-wrapper {
-    .sticky-table-container {
-      width: 100%;
-    }
-  }
-
-  .sticky-table-y-wrapper {
-    top: 1px;
-  }
-
-  .sticky-table-cell {
-    padding: 8px 12px;
-    border-bottom: 1px solid #444;
-  }
+a {
+  text-decoration: none;
 }

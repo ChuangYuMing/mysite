@@ -21,7 +21,7 @@
 
 .top-image {
   text-align: center;
-  margin: 0 auto;
+  margin: 0 auto 30px;
   width: 730px;
   height: 484px;
 
@@ -32,11 +32,12 @@
 }
 
 .title {
-  font-size: 30px;
+  margin-top: 30px;
+  font-size: 2rem;
 }
 
 .content {
-  font-size: 18px;
+  font-size: 1.125rem;
   word-wrap: break-word;
 
   @media screen and (max-width: 812px) {
