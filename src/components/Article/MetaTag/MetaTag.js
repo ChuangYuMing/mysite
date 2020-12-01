@@ -49,12 +49,12 @@ function MetaTag({ data }) {
       <meta property="article:modified_time" content={modified_time} />
       <meta property="fb:admins" content="100031410993377" />
 
-      <link
+      {/* <link
         rel="preload"
         href={bigImageUrl}
         as="image"
         type="image/webp"
-      ></link>
+      ></link> */}
       <script type="application/ld+json">
         {`
               {
