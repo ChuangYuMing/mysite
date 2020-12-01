@@ -11,14 +11,14 @@ class TopImage extends Component {
   }
 
   render() {
-    let { url, title } = this.props
+    let { url, title, base64 } = this.props
     let webp = `${CDN_DOMAIN}/${url}/${url}.webp`
     let jpg = `${CDN_DOMAIN}/${url}/${url}.jpg`
 
     return (
       <picture>
-        <source srcSet={webp} type="image/webp" />
-        <img className={cx("top-image")} width="730" height="484"src={jpg} alt={title} />
+        {/* <source srcSet={webp} type="image/webp" /> */}
+        <img className={cx("top-image")} width="730" height="484"src={base64} alt={title} />
       </picture>
     )
   }

@@ -5,10 +5,7 @@ import { connect } from 'react-redux'
 import { getArticleAsync } from '../../store/reducers/article'
 import { sendPageView } from '../../utils/tracking'
 import LoadingBtn from '../Common/LoadingBtn/LoadingBtn'
-import TopImage from './TopImage/TopImage'
 import NotFound from '../NotFound/NotFound'
-import MetaTag from './MetaTag/MetaTag'
-import withoutHydration from '../../utils/withoutHydration'
 import { useLocation } from 'react-router-dom'
 import ArticleContent from './ArticleContent'
 import StaticContent from '../StaticContent'
@@ -47,14 +44,6 @@ function Article(props) {
     )
   }
 
-  let isChrome =
-    !!window.chrome && (!!window.chrome.webstore || !!window.chrome.runtime)
-
-  const ArticleContentWithoutHydration = withoutHydration()(ArticleContent)
-  const Contetn =
-    isFromOtherPath || !PRODUCTION || isServerPrerender
-      ? ArticleContent
-      : ArticleContentWithoutHydration
 
   return (
     <div className={cx('wrapper')}>
