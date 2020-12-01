@@ -42,7 +42,14 @@ function Pages(props) {
           src={`${CDN_DOMAIN}/${item.url}/${item.url}-thumb.jpg`}
           alt={item.title}
         />
-        <Link to={`/${item.category}/${item.url}/`}>{item.title}</Link>
+        <Link
+          to={{
+            pathname: `/${item.category}/${item.url}/`,
+            state: { fromOtherPath: true }
+          }}
+        >
+          {item.title}
+        </Link>
       </div>
     )
   })

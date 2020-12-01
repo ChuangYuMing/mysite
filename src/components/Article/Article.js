@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './article.css'
 import classNames from 'classnames/bind'
 import { connect } from 'react-redux'
@@ -8,27 +8,38 @@ import LoadingBtn from '../Common/LoadingBtn/LoadingBtn'
 import TopImage from './TopImage/TopImage'
 import NotFound from '../NotFound/NotFound'
 import MetaTag from './MetaTag/MetaTag'
+import withoutHydration from '../../utils/withoutHydration'
+import { useLocation } from 'react-router-dom'
+import ArticleContent from './ArticleContent'
+import StaticContent from '../StaticContent'
 
 let cx = classNames.bind(styles)
 
 function Article(props) {
   let { url: browserUrl } = props.match.params
+  const location = useLocation()
   let { title, content, url, error } = props.datas
+  const [firstRender, setFirstRender] = useState(true) // prerender
+  const isServerPrerender = navigator.userAgent === 'ReactSnap'
+  const isFromOtherPath = location.state && location.state.fromOtherPath
 
   useEffect(() => {
-    // prerender will rehydrate store data, 已經有資料就不用再發request
-    if (url !== browserUrl) {
+    if (isFromOtherPath || !PRODUCTION || isServerPrerender) {
       props.getArticleAsync(browserUrl)
     }
     sendPageView(browserUrl)
+    setFirstRender(false)
   }, [browserUrl])
-
 
   if (error === 1) {
     return <NotFound />
   }
 
-  if (url !== browserUrl || props.isFetching) {
+  if (
+    (isFromOtherPath && url !== browserUrl) ||
+    props.isFetching ||
+    (firstRender && isServerPrerender && url !== browserUrl)
+  ) {
     return (
       <article className={cx('wrapper')}>
         <LoadingBtn />
@@ -39,21 +50,20 @@ function Article(props) {
   let isChrome =
     !!window.chrome && (!!window.chrome.webstore || !!window.chrome.runtime)
 
+  const ArticleContentWithoutHydration = withoutHydration()(ArticleContent)
+  const Contetn =
+    isFromOtherPath || !PRODUCTION || isServerPrerender
+      ? ArticleContent
+      : ArticleContentWithoutHydration
+
   return (
-    <article className={cx('wrapper')}>
-      <h1 className={cx('title')}>{title}</h1>
-      <div className={cx('top-image')}>
-        <TopImage type={isChrome ? 'webp' : 'jpg'} url={url} title={title} />
-      </div>
-      <div
-        className={cx('content')}
-        dangerouslySetInnerHTML={{ __html: content }}
-      />
-      <MetaTag data={props.datas} />
-    </article>
+    <div className={cx('wrapper')}>
+      <StaticContent>
+        <ArticleContent datas={props.datas} />
+      </StaticContent>
+    </div>
   )
 }
-
 
 export default connect(
   (state) => ({
