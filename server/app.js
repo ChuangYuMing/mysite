@@ -1,6 +1,7 @@
 require('newrelic')
 const express = require('express')
 const serveStatic = require('serve-static')
+const expressStaticGzip = require('express-static-gzip')
 const path = require('path')
 const app = express()
 const cors = require('cors')
@@ -57,24 +58,27 @@ app.use(helmet.hidePoweredBy())
 app.use(helmet.xssFilter())
 app.use(helmet.frameguard())
 app.use(cors())
-app.use(
-  serveStatic(path.resolve(__dirname, '../build'), {
-    setHeaders: (res, path, stat) => {
-      if (process.env.NODE_ENV === 'production') {
-        res.setHeader('Content-Encoding', 'br')
-      }
 
-      const noCacheList = ['build/index.html', 'sitemap.xml']
-      const isNoCache = noCacheList.some((item) => path.includes(item))
-      if (isNoCache) {
-        res.setHeader('Cache-Control', 'no-cache')
-      } else {
-        res.setHeader('Cache-Control', 'public, max-age=7776000')
+app.use('/api', apiRouter)
+
+app.use(
+  '/',
+  expressStaticGzip(path.resolve(__dirname, '../build/'), {
+    enableBrotli: true,
+    orderPreference: ['br'],
+    serveStatic: {
+      setHeaders: (res, path, stat) => {
+        const noCacheList = ['build/index.html', 'sitemap.xml']
+        const isNoCache = noCacheList.some((item) => path.includes(item))
+        if (isNoCache) {
+          res.setHeader('Cache-Control', 'no-cache')
+        } else {
+          res.setHeader('Cache-Control', 'public, max-age=7776000')
+        }
       }
     }
   })
 )
-app.use('/api', apiRouter)
 
 // for no static file
 app.use('/', router)
@@ -86,9 +90,6 @@ router.get('/heartbeat', (req, res) => {
 })
 
 router.get('*', (req, res) => {
-  if (process.env.NODE_ENV === 'production') {
-    res.header('Content-Encoding', 'br')
-  }
   res.sendFile(path.resolve(__dirname, '../build/index.html'))
 })
 

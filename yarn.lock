@@ -4345,6 +4345,13 @@ express-history-api-fallback@2.2.1:
   resolved "https://registry.yarnpkg.com/express-history-api-fallback/-/express-history-api-fallback-2.2.1.tgz#3a2ad27f7bebc90fc533d110d7c6d83097bcd057"
   integrity sha1-OirSf3vryQ/FM9EQ18bYMJe80Fc=
 
+express-static-gzip@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/express-static-gzip/-/express-static-gzip-2.1.0.tgz#fd85f9867e5cfc61a97a5ff33bc87e665b73e727"
+  integrity sha512-XGozfjgsfVKBc8lQmPco9zd1+sK9Wy1ZPEAYtH8E34FbBr5BFp2HV+V1PpmIYHaWg8+ecLl/JnQkREbtPSJyxQ==
+  dependencies:
+    serve-static "^1.14.1"
+
 express@4.17.1, express@^4.16.3, express@^4.17.1:
   version "4.17.1"
   resolved "https://registry.yarnpkg.com/express/-/express-4.17.1.tgz#4491fc38605cf51f8629d39c2b5d026f98a4c134"
@@ -11778,3 +11785,8 @@ yeoman-generator@^4.12.0, yeoman-generator@^4.7.2, yeoman-generator@^4.8.2:
   optionalDependencies:
     grouped-queue "^1.1.0"
     yeoman-environment "^2.9.5"
+
+zlib@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/zlib/-/zlib-1.0.5.tgz#6e7c972fc371c645a6afb03ab14769def114fcc0"
+  integrity sha1-bnyXL8NxxkWmr7A6sUdp3vEU/MA=

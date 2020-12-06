@@ -24,10 +24,10 @@ function MetaTag({ data }) {
       <meta name="keywords" content={keywords} />
 
       <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:site" content="@ChildBen" />
+      <meta name="twitter:site" content="@childben28" />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />
-      <meta name="twitter:creator" content="@ChildBen" />
+      <meta name="twitter:creator" content="@childben28" />
       <meta
         name="twitter:image:src"
         content={`https://cdn.childben.com/${url}/${url}.jpg`}
