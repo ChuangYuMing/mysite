@@ -37,7 +37,7 @@ function MetaTag({ data }) {
       <meta property="og:type" content="article" />
       <meta
         property="og:url"
-        content={`https://www.childben.com/${category}/${url}`}
+        content={`https://www.childben.com/${category}/${url}/`}
       />
       <meta
         property="og:image"
@@ -48,6 +48,7 @@ function MetaTag({ data }) {
       <meta property="article:published_time" content={date} />
       <meta property="article:modified_time" content={modified_time} />
       <meta property="fb:admins" content="100031410993377" />
+      <meta property="fb:app_id" content="848708662592927" />
 
       {/* <link
         rel="preload"
