@@ -1,8 +1,6 @@
 import { createStore, applyMiddleware, compose } from 'redux'
-import { createEpicMiddleware } from 'redux-observable'
 import thunk from 'redux-thunk'
 import reducers from './reducers'
-import rootEpic from '../epics.js'
 
 // const apiUrl = appGlobal.apiUrl
 let something = ''
@@ -11,12 +9,11 @@ let something = ''
 // delete window.__PRELOADED_STATE__
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
-const epicMiddleware = createEpicMiddleware()
 
 const store = createStore(
   reducers,
   composeEnhancers(
-    applyMiddleware(thunk.withExtraArgument(something), epicMiddleware)
+    applyMiddleware(thunk.withExtraArgument(something))
   )
 )
 
@@ -27,6 +24,5 @@ const store = createStore(
 //   }
 // }
 
-epicMiddleware.run(rootEpic)
 
 export { store }
