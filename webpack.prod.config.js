@@ -21,7 +21,7 @@ module.exports = {
     children: false
   },
   entry: {
-    app: ['@babel/polyfill', './src/index.js']
+    app: ['./src/index.js']
   },
   output: {
     path: path.resolve(__dirname, 'build'),
