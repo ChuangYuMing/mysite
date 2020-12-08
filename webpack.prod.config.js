@@ -64,7 +64,8 @@ module.exports = {
       chunkFilename: 'static/css/[id].[contenthash:8].css'
     }),
     new HtmlWebpackPlugin({
-      template: 'index.template.html'
+      template: 'index.template.html',
+      scriptLoading: 'defer'
     }),
 
     new webpack.DefinePlugin({
