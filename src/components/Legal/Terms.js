@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import styles from './legal.css'
 import classNames from 'classnames/bind'
+import { Helmet } from 'react-helmet'
 
 let cx = classNames.bind(styles)
 
@@ -319,6 +320,12 @@ function Terms() {
         are provided free of charge, we will not be liable for any loss or
         damage of any nature.
       </p>
+
+      <Helmet>
+        <title>Terms</title>
+        <meta name="description" content="terms" />
+        <meta name="robots" content="noindex, nofollow" />
+      </Helmet>
     </div>
   )
 }

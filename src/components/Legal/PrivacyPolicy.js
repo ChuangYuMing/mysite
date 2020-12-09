@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import styles from './legal.css'
 import classNames from 'classnames/bind'
+import { Helmet } from 'react-helmet'
 
 let cx = classNames.bind(styles)
 
@@ -248,6 +249,12 @@ function PrivacyPolicy() {
         encourage you to contact us immediately and we will do our best
         efforts to promptly remove such information from our records.
       </p>
+
+      <Helmet>
+        <title>Privacy Policy</title>
+        <meta name="description" content="privacy policy" />
+        <meta name="robots" content="noindex, nofollow" />
+      </Helmet>
     </div>
   )
 }

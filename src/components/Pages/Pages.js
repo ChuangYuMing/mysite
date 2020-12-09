@@ -54,11 +54,15 @@ function Pages(props) {
     )
   })
 
+
   return (
     <div className={cx('wrapper')}>
       <div className={cx('items')}>{rows}</div>
       <Helmet>
-        <title>ChildBen</title>
+        <title>
+          ChildBen{category ? `(${category})` : ''}: Guiding you through
+          financial world.
+        </title>
         <meta
           name="description"
           content="ChildBen is the world's leading source of financial content on the web, ranging from market news to retirement strategies, investing, and trading."
