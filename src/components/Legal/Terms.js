@@ -324,7 +324,7 @@ function Terms() {
       <Helmet>
         <title>Terms</title>
         <meta name="description" content="terms" />
-        <meta name="robots" content="noindex, nofollow" />
+        <meta name="robots" content="noindex" />
       </Helmet>
     </div>
   )

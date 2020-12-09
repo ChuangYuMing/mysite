@@ -26,7 +26,7 @@ function Contact() {
       <Helmet>
         <title>Contact us</title>
         <meta name="description" content="Just Contact us" />
-        <meta name="robots" content="noindex, nofollow" />
+        <meta name="robots" content="noindex" />
       </Helmet>
     </div>
   )

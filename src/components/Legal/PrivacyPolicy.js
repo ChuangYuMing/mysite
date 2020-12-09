@@ -253,7 +253,7 @@ function PrivacyPolicy() {
       <Helmet>
         <title>Privacy Policy</title>
         <meta name="description" content="privacy policy" />
-        <meta name="robots" content="noindex, nofollow" />
+        <meta name="robots" content="noindex" />
       </Helmet>
     </div>
   )
