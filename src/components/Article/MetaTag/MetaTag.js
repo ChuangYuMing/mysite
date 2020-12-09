@@ -20,6 +20,7 @@ function MetaTag({ data }) {
   return (
     <Helmet>
       <title>{title}</title>
+      <link rel="canonical" href={`https://www.childben.com/${category}/${url}/`}/>
       <meta name="description" content={description} />
       <meta name="keywords" content={keywords} />
 
