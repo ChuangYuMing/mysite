@@ -37,23 +37,30 @@ module.exports = {
       api: path.resolve(__dirname, 'src/api')
     }
   },
+  externals: {
+    react: 'React',
+    'react-dom': 'ReactDOM',
+    'redux': 'Redux',
+    'react-redux': 'ReactRedux',
+    'react-router-dom': 'ReactRouterDOM'
+  },
   optimization: {
     runtimeChunk: true,
     splitChunks: {
-      cacheGroups: {
-        react: {
-          test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
-          name: 'react',
-          chunks: 'all',
-          priority: 10
-        },
-        vendor: {
-          test: /[\\/]node_modules[\\/]/,
-          name: 'vendor',
-          chunks: 'all',
-          priority: 9
-        }
-      }
+      // cacheGroups: {
+      //   react: {
+      //     test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
+      //     name: 'react',
+      //     chunks: 'all',
+      //     priority: 10
+      //   },
+      //   vendor: {
+      //     test: /[\\/]node_modules[\\/]/,
+      //     name: 'vendor',
+      //     chunks: 'all',
+      //     priority: 9
+      //   }
+      // }
     }
   },
   plugins: [

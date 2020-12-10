@@ -29,7 +29,8 @@ app.use(
         '*.google-analytics.com',
         '*.googletagmanager.com',
         '*.googleapis.com',
-        "'unsafe-inline'"
+        "'unsafe-inline'",
+        "https://unpkg.com"
       ],
       imgSrc: ['*', 'data:'],
       connectSrc: [
