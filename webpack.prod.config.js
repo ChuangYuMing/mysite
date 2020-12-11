@@ -8,6 +8,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
 const postcssPresetEnv = require('postcss-preset-env')
+const PreloadWebpackPlugin = require('preload-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
   .BundleAnalyzerPlugin
 
@@ -73,6 +74,12 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: 'index.template.html',
       scriptLoading: 'defer'
+    }),
+
+    new PreloadWebpackPlugin({
+      rel: 'preload',
+      fileBlacklist: [/\.map/, /\.css/],
+      include: 'allChunks' // or 'initial', or 'allAssets'
     }),
 
     new webpack.DefinePlugin({

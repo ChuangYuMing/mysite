@@ -40,7 +40,8 @@ app.use(
         '*.doubleclick.net',
         '*.googleapis.com',
         '*.childben.com',
-        '*.google.com'
+        '*.google.com',
+        "https://unpkg.com"
       ],
       fontSrc: ['fonts.gstatic.com'],
       objectSrc: ["'none'"],
