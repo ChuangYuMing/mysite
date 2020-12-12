@@ -55,11 +55,11 @@ function purgeCategory() {
       'https://www.childben.com/politics/',
       'https://www.childben.com/history/',
       'https://www.childben.com/api/pages/all',
-      'https://www.childben.com/api/pages/finance/',
-      'https://www.childben.com/api/pages/economics/',
-      'https://www.childben.com/api/pages/investing/',
-      'https://www.childben.com/api/pages/career/',
-      'https://www.childben.com/api/pages/trading/',
+      'https://www.childben.com/api/pages/finance',
+      'https://www.childben.com/api/pages/economics',
+      'https://www.childben.com/api/pages/investing',
+      'https://www.childben.com/api/pages/career',
+      'https://www.childben.com/api/pages/trading',
       'https://www.childben.com/api/pages/politics',
       'https://www.childben.com/api/pages/history'
     ]
