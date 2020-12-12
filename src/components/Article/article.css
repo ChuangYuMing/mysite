@@ -45,6 +45,10 @@
   font-size: 1.125rem;
   word-wrap: break-word;
 
+  a {
+    border-bottom: solid 2px #fb3a00;
+  }
+
   @media screen and (max-width: 812px) {
     img {
       max-width: 280px;
