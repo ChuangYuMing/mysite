@@ -1,4 +1,3 @@
-require('newrelic')
 const express = require('express')
 const serveStatic = require('serve-static')
 const expressStaticGzip = require('express-static-gzip')
