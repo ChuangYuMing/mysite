@@ -76,11 +76,11 @@ module.exports = {
       scriptLoading: 'defer'
     }),
 
-    new PreloadWebpackPlugin({
-      rel: 'preload',
-      fileBlacklist: [/\.map/, /\.css/],
-      include: 'allChunks' // or 'initial', or 'allAssets'
-    }),
+    // new PreloadWebpackPlugin({
+    //   rel: 'preload',
+    //   fileBlacklist: [/\.map/, /\.css/],
+    //   include: 'allChunks' // or 'initial', or 'allAssets'
+    // }),
 
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production')

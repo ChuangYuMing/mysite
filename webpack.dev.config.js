@@ -11,7 +11,7 @@ process.traceDeprecation = true
 
 module.exports = {
   mode: 'development',
-  devtool: 'cheap-module-eval-source-map',
+  devtool: 'eval-source-map',
   entry: ['react-hot-loader/patch', './src/index.js'],
   output: {
     path: path.resolve(__dirname, 'build'),
@@ -23,7 +23,8 @@ module.exports = {
       modules: path.resolve(__dirname, 'src/modules'),
       static: path.resolve(__dirname, 'src/static'),
       store: path.resolve(__dirname, 'src/store'),
-      api: path.resolve(__dirname, 'src/api')
+      api: path.resolve(__dirname, 'src/api'),
+      'react-dom': '@hot-loader/react-dom'
     }
   },
   plugins: [
@@ -37,7 +38,7 @@ module.exports = {
     })
   ],
   optimization: {
-    namedModules: true
+    moduleIds: 'named'
   },
   module: {
     rules: [
