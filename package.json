@@ -111,7 +111,10 @@
     "purgeAll": "node -e 'require(\"./bin/purge.js\").purgeAll()'",
     "purgeCategory": "node -e 'require(\"./bin/purge.js\").purgeCategory()'",
     "compress": "node ./bin/compress.js",
-    "deploy": "yarn build && yarn prerender && yarn sitemap && yarn compress && heroku container:login && heroku container:push web && heroku container:release web && docker image prune -f"
+    "deployApi": "heroku container:login && heroku container:push web && heroku container:release web && docker image prune -f",
+    "buildProduction": "yarn build && yarn prerender && yarn sitemap && yarn compress",
+    "deploy": "yarn buildProduction && rsync -avzh --progress  --ignore-existing build/* Jamie@34.86.21.205:/var/www/www.childben.com",
+    "deployAll": "yarn buildProduction && rsync -avzh --progress build/* Jamie@34.86.21.205:/var/www/www.childben.com"
   },
   "author": "childben",
   "license": "ISC"

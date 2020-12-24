@@ -1,7 +1,7 @@
 const express = require('express')
-const serveStatic = require('serve-static')
-const expressStaticGzip = require('express-static-gzip')
-const path = require('path')
+// const serveStatic = require('serve-static')
+// const expressStaticGzip = require('express-static-gzip')
+// const path = require('path')
 const app = express()
 const cors = require('cors')
 const helmet = require('helmet')
@@ -19,35 +19,35 @@ const pool = new Pool({
 })
 
 app.use(express.json())
-app.use(
-  helmet.contentSecurityPolicy({
-    directives: {
-      defaultSrc: ["'self'", '*.childben.com'],
-      scriptSrc: [
-        "'self'",
-        '*.google-analytics.com',
-        '*.googletagmanager.com',
-        '*.googleapis.com',
-        "'unsafe-inline'",
-        "https://unpkg.com"
-      ],
-      imgSrc: ['*', 'data:'],
-      connectSrc: [
-        "'self'",
-        '*.google-analytics.com',
-        '*.googletagmanager.com',
-        '*.doubleclick.net',
-        '*.googleapis.com',
-        '*.childben.com',
-        '*.google.com',
-        "https://unpkg.com"
-      ],
-      fontSrc: ['fonts.gstatic.com'],
-      objectSrc: ["'none'"],
-      styleSrc: ["'self'", '*.childben.com', "'unsafe-inline'"]
-    }
-  })
-)
+// app.use(
+//   helmet.contentSecurityPolicy({
+//     directives: {
+//       defaultSrc: ["'self'", '*.childben.com'],
+//       scriptSrc: [
+//         "'self'",
+//         '*.google-analytics.com',
+//         '*.googletagmanager.com',
+//         '*.googleapis.com',
+//         "'unsafe-inline'",
+//         "https://unpkg.com"
+//       ],
+//       imgSrc: ['*', 'data:'],
+//       connectSrc: [
+//         "'self'",
+//         '*.google-analytics.com',
+//         '*.googletagmanager.com',
+//         '*.doubleclick.net',
+//         '*.googleapis.com',
+//         '*.childben.com',
+//         '*.google.com',
+//         "https://unpkg.com"
+//       ],
+//       fontSrc: ['fonts.gstatic.com'],
+//       objectSrc: ["'none'"],
+//       styleSrc: ["'self'", '*.childben.com', "'unsafe-inline'"]
+//     }
+//   })
+// )
 app.use(
   helmet.hsts({
     maxAge: 86400,
@@ -62,24 +62,24 @@ app.use(cors())
 
 app.use('/api', apiRouter)
 
-app.use(
-  '/',
-  expressStaticGzip(path.resolve(__dirname, '../build/'), {
-    enableBrotli: true,
-    orderPreference: ['br'],
-    serveStatic: {
-      setHeaders: (res, path, stat) => {
-        const noCacheList = ['build/index.html', 'sitemap.xml']
-        const isNoCache = noCacheList.some((item) => path.includes(item))
-        if (isNoCache) {
-          res.setHeader('Cache-Control', 'no-cache')
-        } else {
-          res.setHeader('Cache-Control', 'public, max-age=7776000')
-        }
-      }
-    }
-  })
-)
+// app.use(
+//   '/',
+//   expressStaticGzip(path.resolve(__dirname, '../build/'), {
+//     enableBrotli: true,
+//     orderPreference: ['br'],
+//     serveStatic: {
+//       setHeaders: (res, path, stat) => {
+//         const noCacheList = ['build/index.html', 'sitemap.xml']
+//         const isNoCache = noCacheList.some((item) => path.includes(item))
+//         if (isNoCache) {
+//           res.setHeader('Cache-Control', 'no-cache')
+//         } else {
+//           res.setHeader('Cache-Control', 'public, max-age=7776000')
+//         }
+//       }
+//     }
+//   })
+// )
 
 // for no static file
 app.use('/', router)
@@ -90,9 +90,9 @@ router.get('/heartbeat', (req, res) => {
   return res.send('heartbeat')
 })
 
-router.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '../build/index.html'))
-})
+// router.get('*', (req, res) => {
+//   res.sendFile(path.resolve(__dirname, '../build/index.html'))
+// })
 
 // api router
 apiRouter.get('/article', async (req, res) => {

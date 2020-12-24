@@ -54,14 +54,14 @@ function purgeCategory() {
       'https://www.childben.com/trading/',
       'https://www.childben.com/politics/',
       'https://www.childben.com/history/',
-      'https://www.childben.com/api/pages/all',
-      'https://www.childben.com/api/pages/finance',
-      'https://www.childben.com/api/pages/economics',
-      'https://www.childben.com/api/pages/investing',
-      'https://www.childben.com/api/pages/career',
-      'https://www.childben.com/api/pages/trading',
-      'https://www.childben.com/api/pages/politics',
-      'https://www.childben.com/api/pages/history'
+      'https://api.childben.com/api/pages/all',
+      'https://api.childben.com/api/pages/finance',
+      'https://api.childben.com/api/pages/economics',
+      'https://api.childben.com/api/pages/investing',
+      'https://api.childben.com/api/pages/career',
+      'https://api.childben.com/api/pages/trading',
+      'https://api.childben.com/api/pages/politics',
+      'https://api.childben.com/api/pages/history'
     ]
   }
 
