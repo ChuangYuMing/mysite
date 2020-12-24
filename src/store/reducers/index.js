@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import pages from './pages'
+import pages from './pages2'
 import article from './article'
 
 const rootReducer = combineReducers({

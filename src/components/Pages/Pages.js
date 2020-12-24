@@ -8,17 +8,18 @@ import { Helmet } from 'react-helmet'
 import { sendPageView } from '../../utils/tracking'
 import LoadingBtn from '../Common/LoadingBtn/LoadingBtn'
 import { CDN_DOMAIN } from '../../constant'
+import { getPagesByCategory } from '../../store/reducers/pages2'
 
 let cx = classNames.bind(styles)
 
-function Pages(props) {
+function Pages( props ) {
   let pages = props.pages
   let { category } = props.match.params
   const [firstRender, setFirstRender] = useState(true)
 
   useEffect(() => {
     if (!firstRender || pages.length === 0) {
-      props.getPagesAsync(category)
+      props.getPagesByCategory(category)
     }
     sendPageView(category)
     setFirstRender(false)
@@ -54,7 +55,6 @@ function Pages(props) {
     )
   })
 
-
   return (
     <div className={cx('wrapper')}>
       <div className={cx('items')}>{rows}</div>
@@ -77,5 +77,5 @@ export default connect(
     pages: state.pages.datas,
     isFetching: state.pages.isFetching
   }),
-  { getPagesAsync, clearPages }
+  { getPagesByCategory, clearPages }
 )(Pages)
