@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react'
 import styles from './article.css'
 import classNames from 'classnames/bind'
 import { connect } from 'react-redux'
-import { getArticleAsync } from '../../store/reducers/article'
 import { sendPageView } from '../../utils/tracking'
 import LoadingBtn from '../Common/LoadingBtn/LoadingBtn'
 import NotFound from '../NotFound/NotFound'
 import { useLocation } from 'react-router-dom'
 import ArticleContent from './ArticleContent'
 import StaticContent from '../StaticContent'
+import { getArticle } from './articleSlice'
 
 let cx = classNames.bind(styles)
 
@@ -22,7 +22,7 @@ function Article(props) {
 
   useEffect(() => {
     if (isFromOtherPath || !PRODUCTION || isServerPrerender) {
-      props.getArticleAsync(browserUrl)
+      props.getArticle(browserUrl)
     }
     sendPageView(browserUrl)
     setFirstRender(false)
@@ -34,7 +34,7 @@ function Article(props) {
 
   if (
     (isFromOtherPath && url !== browserUrl) ||
-    props.isFetching ||
+    props.isFetching === 'pending' ||
     (firstRender && isServerPrerender && url !== browserUrl)
   ) {
     return (
@@ -43,7 +43,6 @@ function Article(props) {
       </article>
     )
   }
-
 
   return (
     <div className={cx('wrapper')}>
@@ -59,5 +58,5 @@ export default connect(
     datas: state.article.datas,
     isFetching: state.article.isFetching
   }),
-  { getArticleAsync }
+  { getArticle }
 )(Article)

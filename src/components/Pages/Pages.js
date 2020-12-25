@@ -1,24 +1,28 @@
 import React, { useEffect, useState } from 'react'
+import { useLocation } from 'react-router-dom'
 import styles from './pages.css'
 import classNames from 'classnames/bind'
 import { connect } from 'react-redux'
-import { getPagesAsync, clearPages } from '../../store/reducers/pages'
 import { Link } from 'react-router-dom'
 import { Helmet } from 'react-helmet'
 import { sendPageView } from '../../utils/tracking'
 import LoadingBtn from '../Common/LoadingBtn/LoadingBtn'
 import { CDN_DOMAIN } from '../../constant'
-import { getPagesByCategory } from '../../store/reducers/pages2'
+import { getPagesByCategory, clearPages } from './pagesSlice'
+import StaticContent from '../StaticContent'
 
 let cx = classNames.bind(styles)
 
-function Pages( props ) {
+function Pages(props) {
   let pages = props.pages
   let { category } = props.match.params
+  const location = useLocation()
   const [firstRender, setFirstRender] = useState(true)
+  const isServerPrerender = navigator.userAgent === 'ReactSnap'
+  const isFromOtherPath = location.state && location.state.fromOtherPath
 
   useEffect(() => {
-    if (!firstRender || pages.length === 0) {
+    if (isFromOtherPath || !PRODUCTION || isServerPrerender) {
       props.getPagesByCategory(category)
     }
     sendPageView(category)
@@ -28,7 +32,7 @@ function Pages( props ) {
     }
   }, [category])
 
-  if (pages.length === 0 || props.isFetching) {
+  if (props.isFetching === 'pending') {
     return (
       <article className={cx('wrapper')}>
         <LoadingBtn />
@@ -56,19 +60,21 @@ function Pages( props ) {
   })
 
   return (
-    <div className={cx('wrapper')}>
-      <div className={cx('items')}>{rows}</div>
-      <Helmet>
-        <title>
-          ChildBen{category ? `(${category})` : ''}: Guiding you through
-          financial world.
-        </title>
-        <meta
-          name="description"
-          content="ChildBen is the world's leading source of financial content on the web, ranging from market news to retirement strategies, investing, and trading."
-        />
-      </Helmet>
-    </div>
+    <StaticContent>
+      <div className={cx('wrapper')}>
+        <div className={cx('items')}>{rows}</div>
+        <Helmet>
+          <title>
+            ChildBen{category ? `(${category})` : ''}: Guiding you through
+            financial world.
+          </title>
+          <meta
+            name="description"
+            content="ChildBen is the world's leading source of financial content on the web, ranging from market news to retirement strategies, investing, and trading."
+          />
+        </Helmet>
+      </div>
+    </StaticContent>
   )
 }
 

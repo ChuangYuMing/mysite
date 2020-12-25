@@ -14,15 +14,23 @@ const pagesSlice = createSlice({
   name: 'pages',
   initialState: {
     datas: [],
-    isFetching: false
+    isFetching: 'idle'
   },
-  reducers: {},
+  reducers: {
+    clearPages(state, action) {
+      state.datas = []
+    }
+  },
   extraReducers: {
+    [getPagesByCategory.pending]: (state, action) => {
+      state.isFetching = 'pending'
+    },
     [getPagesByCategory.fulfilled]: (state, action) => {
       state.datas = action.payload
+      state.isFetching = 'fulfilled'
     }
   }
 })
 
-
+export const { clearPages } = pagesSlice.actions
 export default pagesSlice.reducer

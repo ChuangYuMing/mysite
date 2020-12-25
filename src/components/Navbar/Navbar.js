@@ -26,25 +26,67 @@ function Navbar(props) {
 
   const Links = (
     <>
-      <Link to="/finance/" aria-label="Finance">
+      <Link
+        to={{
+          pathname: '/finance/',
+          state: { fromOtherPath: true }
+        }}
+        aria-label="Finance"
+      >
         Finance
       </Link>
-      <Link to="/economics/" aria-label="Economics">
+      <Link
+        to={{
+          pathname: '/economics/',
+          state: { fromOtherPath: true }
+        }}
+        aria-label="Economics"
+      >
         Economics
       </Link>
-      <Link to="/investing/" aria-label="Investing">
+      <Link
+        to={{
+          pathname: '/investing/',
+          state: { fromOtherPath: true }
+        }}
+        aria-label="Investing"
+      >
         Investing
       </Link>
-      <Link to="/career/" aria-label="Career">
+      <Link
+        to={{
+          pathname: '/career/',
+          state: { fromOtherPath: true }
+        }}
+        aria-label="Career"
+      >
         Career
       </Link>
-      <Link to="/trading/" aria-label="Trading">
+      <Link
+        to={{
+          pathname: '/trading/',
+          state: { fromOtherPath: true }
+        }}
+        aria-label="Trading"
+      >
         Trading
       </Link>
-      <Link to="/politics/" aria-label="Politics">
+      <Link
+        to={{
+          pathname: '/politics/',
+          state: { fromOtherPath: true }
+        }}
+        aria-label="Politics"
+      >
         Politics
       </Link>
-      <Link to="/history/" aria-label="History">
+      <Link
+        to={{
+          pathname: '/history/',
+          state: { fromOtherPath: true }
+        }}
+        aria-label="History"
+      >
         History
       </Link>
     </>
@@ -52,26 +94,39 @@ function Navbar(props) {
   return (
     <>
       <div className={cx('wrapper')}>
-        <img
-          className={cx('logo')}
-          width="45"
-          height="45"
-          src={logo}
-          onClick={goHome}
-          alt="Logo"
-        />
-        <nav className={cx('category')}>{Links}</nav>
-      </div>
-      <div className={cx('mb-wrapper')}>
-        <div className={cx('top')}>
+        <Link
+          to={{
+            pathname: '/',
+            state: { fromOtherPath: true }
+          }}
+        >
           <img
             className={cx('logo')}
             width="45"
             height="45"
             src={logo}
-            onClick={goHome}
             alt="Logo"
           />
+        </Link>
+        <nav className={cx('category')}>{Links}</nav>
+      </div>
+      <div className={cx('mb-wrapper')}>
+        <div className={cx('top')}>
+          <Link
+            to={{
+              pathname: '/',
+              state: { fromOtherPath: true }
+            }}
+          >
+            <img
+              className={cx('logo')}
+              width="45"
+              height="45"
+              src={logo}
+              onClick={goHome}
+              alt="Logo"
+            />
+          </Link>
           <span className={cx('title')}>ChildBen</span>
           <MenuBtn className={cx('menu')} onClick={toggleMenu} color="#000" />
         </div>

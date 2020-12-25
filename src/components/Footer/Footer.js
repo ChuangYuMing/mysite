@@ -9,10 +9,16 @@ function Footer() {
   return (
     <>
       <div className={cx('wrapper')}>
-      <Link to="/" aria-label="Home">
-      <span className={cx('logo')}>Child Ben</span>
-          </Link>
-        
+        <Link
+          to={{
+            pathname: '/',
+            state: { fromOtherPath: true }
+          }}
+          aria-label="Home"
+        >
+          <span className={cx('logo')}>Child Ben</span>
+        </Link>
+
         <div className={cx('links')}>
           <Link to="/contact/" aria-label="Contact">
             Contact
@@ -25,7 +31,8 @@ function Footer() {
           </Link>
         </div>
       </div>
-    </>)
+    </>
+  )
 }
 
 export default withRouter(Footer)
