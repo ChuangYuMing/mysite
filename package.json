@@ -114,8 +114,8 @@
     "dbBackup": "heroku pg:backups:capture && heroku pg:backups:download",
     "deployApi": "heroku container:login && heroku container:push web && heroku container:release web && docker image prune -f",
     "buildProduction": "yarn build && yarn prerender && yarn sitemap && yarn compress",
-    "deploy": "yarn buildProduction && rsync -avzh --progress  --ignore-existing build/* Jamie@34.86.21.205:/var/www/www.childben.com",
-    "deployAll": "yarn buildProduction && rsync -avzh --progress build/* Jamie@34.86.21.205:/var/www/www.childben.com"
+    "deploy": "yarn buildProduction && rsync -vzh --progress  --size-only build/* Jamie@34.86.21.205:/var/www/www.childben.com",
+    "deployAll": "yarn buildProduction && rsync -vzh --progress build/* Jamie@34.86.21.205:/var/www/www.childben.com"
   },
   "author": "childben",
   "license": "ISC"
