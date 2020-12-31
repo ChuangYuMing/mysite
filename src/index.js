@@ -4,7 +4,6 @@ import AppProvider from './components/AppProvider'
 
 const rootElement = document.getElementById('root')
 const render = (Component) => {
-  console.log('render')
   if (rootElement.hasChildNodes()) {
     ReactDOM.hydrate(<Component />, rootElement)
   } else {
