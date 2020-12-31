@@ -5,6 +5,7 @@ const path = require('path')
 const postcssPresetEnv = require('postcss-preset-env')
 const webpack = require('webpack')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
 console.log(process.env.NODE_ENV)
 process.traceDeprecation = true
@@ -12,7 +13,8 @@ process.traceDeprecation = true
 module.exports = {
   mode: 'development',
   devtool: 'eval-source-map',
-  entry: ['react-hot-loader/patch', './src/index.js'],
+  target: 'web', //fix hot reload:  https://github.com/pmmmwh/react-refresh-webpack-plugin/blob/main/docs/TROUBLESHOOTING.md
+  entry: ['./src/index.js'],
   output: {
     path: path.resolve(__dirname, 'build'),
     filename: 'bundle.js',
@@ -23,12 +25,11 @@ module.exports = {
       modules: path.resolve(__dirname, 'src/modules'),
       static: path.resolve(__dirname, 'src/static'),
       store: path.resolve(__dirname, 'src/store'),
-      api: path.resolve(__dirname, 'src/api'),
-      'react-dom': '@hot-loader/react-dom'
+      api: path.resolve(__dirname, 'src/api')
     }
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(), // Enable HMR
+    new ReactRefreshWebpackPlugin(),
     new MiniCssExtractPlugin({
       filename: 'css/main.css',
       chunkFilename: 'css/[id].css'

@@ -2,7 +2,6 @@ import React from 'react'
 import { Provider } from 'react-redux'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { store } from 'store/index.js'
-import { hot } from 'react-hot-loader'
 import App from '../App/App'
 
 function AppProvider() {
@@ -15,4 +14,4 @@ function AppProvider() {
   )
 }
 
-export default hot(module)(AppProvider)
+export default AppProvider;

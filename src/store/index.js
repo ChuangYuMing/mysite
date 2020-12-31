@@ -23,6 +23,7 @@ const store = configureStore({
   reducer: reducers
 })
 
+
 // window.snapSaveState = () => {
 //   document.querySelector('#root').setAttribute('data-server-rendered', 'true')
 //   return {
