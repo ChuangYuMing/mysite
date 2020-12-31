@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import { Route } from 'react-router-dom'
 import './App.css'
@@ -51,10 +50,4 @@ function App() {
   return <Route component={Main} />
 }
 
-
-
-
-const mapStateToProps = (state) => {
-  return {}
-}
-export default withRouter(connect(mapStateToProps)(App))
+export default withRouter(App)

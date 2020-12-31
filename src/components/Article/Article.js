@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import styles from './article.css'
 import classNames from 'classnames/bind'
-import { connect } from 'react-redux'
 import { sendPageView } from '../../utils/tracking'
 import LoadingBtn from '../Common/LoadingBtn/LoadingBtn'
 import NotFound from '../NotFound/NotFound'
@@ -9,20 +8,23 @@ import { useLocation } from 'react-router-dom'
 import ArticleContent from './ArticleContent'
 import StaticContent from '../StaticContent'
 import { getArticle } from './articleSlice'
+import { useSelector, useDispatch } from 'react-redux'
 
 let cx = classNames.bind(styles)
 
 function Article(props) {
   let { url: browserUrl } = props.match.params
+  const { datas, isFetching } = useSelector((state) => state.article)
   const location = useLocation()
-  let { title, content, url, error } = props.datas
+  const dispatch = useDispatch()
+  let { title, content, url, error } = datas
   const [firstRender, setFirstRender] = useState(true) // prerender
   const isServerPrerender = navigator.userAgent === 'ReactSnap'
   const isFromOtherPath = location.state && location.state.fromOtherPath
 
   useEffect(() => {
     if (isFromOtherPath || !PRODUCTION || isServerPrerender) {
-      props.getArticle(browserUrl)
+      dispatch(getArticle(browserUrl))
     }
     sendPageView(browserUrl)
     setFirstRender(false)
@@ -34,7 +36,7 @@ function Article(props) {
 
   if (
     (isFromOtherPath && url !== browserUrl) ||
-    props.isFetching === 'pending' ||
+    isFetching === 'pending' ||
     (firstRender && isServerPrerender && url !== browserUrl)
   ) {
     return (
@@ -47,16 +49,10 @@ function Article(props) {
   return (
     <div className={cx('wrapper')}>
       <StaticContent>
-        <ArticleContent datas={props.datas} />
+        <ArticleContent datas={datas} />
       </StaticContent>
     </div>
   )
 }
 
-export default connect(
-  (state) => ({
-    datas: state.article.datas,
-    isFetching: state.article.isFetching
-  }),
-  { getArticle }
-)(Article)
+export default Article

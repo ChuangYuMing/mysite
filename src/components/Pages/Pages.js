@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import styles from './pages.css'
 import classNames from 'classnames/bind'
-import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { Helmet } from 'react-helmet'
 import { sendPageView } from '../../utils/tracking'
@@ -10,29 +9,31 @@ import LoadingBtn from '../Common/LoadingBtn/LoadingBtn'
 import { CDN_DOMAIN } from '../../constant'
 import { getPagesByCategory, clearPages } from './pagesSlice'
 import StaticContent from '../StaticContent'
+import { useSelector, useDispatch } from 'react-redux'
 
 let cx = classNames.bind(styles)
 
 function Pages(props) {
-  let pages = props.pages
   let { category } = props.match.params
+  const { datas: pages, isFetching } = useSelector((state) => state.pages)
   const location = useLocation()
+  const dispatch = useDispatch()
   const [firstRender, setFirstRender] = useState(true)
   const isServerPrerender = navigator.userAgent === 'ReactSnap'
   const isFromOtherPath = location.state && location.state.fromOtherPath
 
   useEffect(() => {
     if (isFromOtherPath || !PRODUCTION || isServerPrerender) {
-      props.getPagesByCategory(category)
+      dispatch(getPagesByCategory(category))
     }
     sendPageView(category)
     setFirstRender(false)
     return () => {
-      props.clearPages()
+      dispatch(clearPages())
     }
   }, [category])
 
-  if (props.isFetching === 'pending') {
+  if (isFetching === 'pending') {
     return (
       <article className={cx('wrapper')}>
         <LoadingBtn />
@@ -78,10 +79,4 @@ function Pages(props) {
   )
 }
 
-export default connect(
-  (state) => ({
-    pages: state.pages.datas,
-    isFetching: state.pages.isFetching
-  }),
-  { getPagesByCategory, clearPages }
-)(Pages)
+export default Pages
