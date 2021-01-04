@@ -1,14 +1,18 @@
 import React, { Component } from 'react'
 import { Helmet } from 'react-helmet'
-import styles from './notfound.css'
-import classNames from 'classnames/bind'
+import styled from 'styled-components'
 
-let cx = classNames.bind(styles)
+const Wrapper = styled.div`
+  flex: 1;
+  font-size: 30px;
+  text-align: center;
+  padding-top: 50px;
+`
 
 function NotFound() {
   return (
     <>
-      <div className={cx('wrapper')}>Ooops page not found...</div>
+      <Wrapper>Ooops page not found...</Wrapper>
       <Helmet>
         <title>404</title>
         <meta name="description" content="page not found" />

@@ -1,14 +1,20 @@
 import React from 'react'
-import style from './loading-btn.css'
+import styled from 'styled-components'
+
+const Icon = styled.svg`
+  transform: translateX(-50%);
+  position: relative;
+  left: 50%;
+  top: 50px;
+`
 
 const LoadingBtn = ({ className, onClick, color }) => (
-  <svg
+  <Icon
     width="80px"
     height="80px"
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 100 100"
     preserveAspectRatio="xMidYMid"
-    className={style.loading}
   >
     <circle cx="84" cy="50" r="0" fill="#71c2cc">
       <animate
@@ -120,7 +126,7 @@ const LoadingBtn = ({ className, onClick, color }) => (
         begin="0s"
       />
     </circle>
-  </svg>
+  </Icon>
 )
 
 export default LoadingBtn

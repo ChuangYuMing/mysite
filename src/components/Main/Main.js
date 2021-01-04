@@ -1,6 +1,4 @@
 import React from 'react'
-import styles from './main.css'
-import classNames from 'classnames/bind'
 import Navbar from '../Navbar/Navbar'
 import Footer from '../Footer/Footer'
 import Article from '../Article/Article'
@@ -10,14 +8,30 @@ import Terms from '../Legal/Terms'
 import Contact from '../Legal/Contact'
 import Pages from '../Pages/Pages'
 import { Route, Switch, Redirect } from 'react-router-dom'
+import styled from 'styled-components'
 
-let cx = classNames.bind(styles)
+const Wrapper = styled.div`
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #3e3d3d;
+`
+
+const Container = styled.div`
+  display: flex;
+  width: 100%;
+  max-width: 1280px;
+  min-height: 350px;
+  margin: 0 auto;
+`
 
 function Main() {
   return (
-    <main className={cx('wrapper')}>
+    <Wrapper>
       <Navbar />
-      <div className={cx('container')}>
+      <Container>
         <Switch>
           <Route
             exact
@@ -33,9 +47,9 @@ function Main() {
           <Route path="/:category/:url" component={Article} />
         </Switch>
         {/* <Aside /> */}
-      </div>
+      </Container>
       <Footer />
-    </main>
+    </Wrapper>
   )
 }
 

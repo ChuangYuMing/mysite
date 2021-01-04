@@ -1,9 +1,14 @@
 import React, { Component } from 'react'
-import styles from './top-image.css'
-import classNames from 'classnames/bind'
 import { CDN_DOMAIN } from '../../../constant'
+import styled from 'styled-components'
 
-let cx = classNames.bind(styles)
+const Picture = styled.picture`
+  img {
+    height: auto;
+    width: 100%;
+  }
+`
+
 class TopImage extends Component {
   constructor(props) {
     super(props)
@@ -16,10 +21,10 @@ class TopImage extends Component {
     let jpg = `${CDN_DOMAIN}/${url}/${url}.jpg`
 
     return (
-      <picture>
+      <Picture>
         {/* <source srcSet={webp} type="image/webp" /> */}
-        <img className={cx("top-image")} width="730" height="484"src={base64} alt={title} />
-      </picture>
+        <img width="730" height="484" src={base64} alt={title} />
+      </Picture>
     )
   }
 }

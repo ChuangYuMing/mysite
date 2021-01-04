@@ -1,9 +1,6 @@
 import React, { useEffect } from 'react'
-import styles from './legal.css'
-import classNames from 'classnames/bind'
 import { Helmet } from 'react-helmet'
-
-let cx = classNames.bind(styles)
+import Wrapper from './Wrapper'
 
 function Contact() {
   useEffect(() => {
@@ -12,7 +9,7 @@ function Contact() {
   }, [])
 
   return (
-    <div className={cx('wrapper')}>
+    <Wrapper>
       <h1>
         Hi, ChildBen is the world's leading source of financial content on the
         web, ranging from market news to retirement strategies, investing, and
@@ -28,7 +25,7 @@ function Contact() {
         <meta name="description" content="Just Contact us" />
         <meta name="robots" content="noindex" />
       </Helmet>
-    </div>
+    </Wrapper>
   )
 }
 

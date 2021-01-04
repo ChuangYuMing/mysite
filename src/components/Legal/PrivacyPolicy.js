@@ -1,10 +1,8 @@
 import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import styles from './legal.css'
-import classNames from 'classnames/bind'
 import { Helmet } from 'react-helmet'
+import Wrapper from './Wrapper'
 
-let cx = classNames.bind(styles)
 
 function PrivacyPolicy() {
   useEffect(() => {
@@ -13,7 +11,7 @@ function PrivacyPolicy() {
   }, [])
 
   return (
-    <div className={cx('wrapper')}>
+    <Wrapper>
       <h1>Privacy Policy for ChildBen</h1>
 
       <p>
@@ -255,7 +253,7 @@ function PrivacyPolicy() {
         <meta name="description" content="privacy policy" />
         <meta name="robots" content="noindex" />
       </Helmet>
-    </div>
+    </Wrapper>
   )
 }
 

@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
-import styles from './pages.css'
-import classNames from 'classnames/bind'
 import { Link } from 'react-router-dom'
 import { Helmet } from 'react-helmet'
 import { sendPageView } from '../../utils/tracking'
@@ -10,8 +8,56 @@ import { CDN_DOMAIN } from '../../constant'
 import { getPagesByCategory, clearPages } from './pagesSlice'
 import StaticContent from '../StaticContent'
 import { useSelector, useDispatch } from 'react-redux'
+import styled from 'styled-components'
 
-let cx = classNames.bind(styles)
+const Wrapper = styled.div`
+  flex: 1;
+  width: 100%;
+  min-height: calc(100vh - 85px);
+`
+
+const Items = styled.div`
+  margin: 10px auto 0 auto;
+  padding: 20px;
+
+  @media screen and (max-width: 812px) {
+    width: 100%;
+    padding: 0;
+  }
+`
+
+const Item = styled.div`
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 120px;
+  font-size: 30px;
+  border: 1px solid #e9e9e9;
+  cursor: pointer;
+  padding: 20px 15px;
+  border-bottom: 0;
+
+  @media screen and (max-width: 812px) {
+    font-size: 15px;
+  }
+
+  img {
+    width: 100px;
+    height: 100px;
+  }
+
+  a {
+    margin-left: 10px;
+    text-overflow: ellipsis;
+    color: #4c4c4ce3;
+  }
+
+  &:hover {
+    a {
+      color: #9a4b4b;
+    }
+  }
+`
 
 function Pages(props) {
   let { category } = props.match.params
@@ -35,15 +81,15 @@ function Pages(props) {
 
   if (isFetching === 'pending') {
     return (
-      <article className={cx('wrapper')}>
+      <Wrapper>
         <LoadingBtn />
-      </article>
+      </Wrapper>
     )
   }
 
   let rows = pages.map((item) => {
     return (
-      <div className={cx('item')} key={item.title}>
+      <Item key={item.title}>
         <img
           src={`${CDN_DOMAIN}/${item.url}/${item.url}-thumb.jpg`}
           alt={item.title}
@@ -56,14 +102,14 @@ function Pages(props) {
         >
           {item.title}
         </Link>
-      </div>
+      </Item>
     )
   })
 
   return (
     <StaticContent>
-      <div className={cx('wrapper')}>
-        <div className={cx('items')}>{rows}</div>
+      <Wrapper>
+        <Items>{rows}</Items>
         <Helmet>
           <title>
             ChildBen{category ? `(${category})` : ''}: Guiding you through
@@ -74,7 +120,7 @@ function Pages(props) {
             content="ChildBen is the world's leading source of financial content on the web, ranging from market news to retirement strategies, investing, and trading."
           />
         </Helmet>
-      </div>
+      </Wrapper>
     </StaticContent>
   )
 }

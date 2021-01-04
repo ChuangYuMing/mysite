@@ -7,7 +7,6 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
-const postcssPresetEnv = require('postcss-preset-env')
 const PreloadWebpackPlugin = require('preload-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
   .BundleAnalyzerPlugin
@@ -105,40 +104,6 @@ module.exports = {
         use: [
           {
             loader: 'babel-loader'
-          }
-        ]
-      },
-      {
-        test: /\.css$/,
-        exclude: /node_modules/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          {
-            loader: 'css-loader',
-            options: {
-              modules: {
-                localIdentName: '[name]_[local]_[hash:base64:5]'
-              },
-              importLoaders: 1,
-              sourceMap: true
-            }
-          },
-          {
-            loader: 'postcss-loader',
-            options: {
-              ident: 'postcss',
-              plugins: (loader) => [
-                postcssPresetEnv(),
-                require('postcss-global-import')(),
-                require('postcss-import')({
-                  path: './src/modules/shared/styles/'
-                }),
-                require('postcss-mixins')(),
-                require('postcss-nested')(),
-                require('postcss-simple-vars')(),
-                require('cssnano')()
-              ]
-            }
           }
         ]
       },

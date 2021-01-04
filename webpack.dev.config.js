@@ -2,7 +2,6 @@
   FOR DEVELOPMENT test
 */
 const path = require('path')
-const postcssPresetEnv = require('postcss-preset-env')
 const webpack = require('webpack')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
@@ -49,40 +48,6 @@ module.exports = {
         use: [
           {
             loader: 'babel-loader'
-          }
-        ]
-      },
-      {
-        test: /\.css$/,
-        exclude: /node_modules/,
-        use: [
-          'style-loader',
-          {
-            loader: 'css-loader',
-            options: {
-              modules: {
-                localIdentName: '[name]_[local]_[hash:base64:5]'
-              },
-              importLoaders: 1,
-              sourceMap: true
-            }
-          },
-          {
-            loader: 'postcss-loader',
-            options: {
-              ident: 'postcss',
-              plugins: (loader) => [
-                postcssPresetEnv(),
-                require('postcss-global-import')(),
-                require('postcss-import')({
-                  path: './src/modules/shared/styles/'
-                }),
-                require('postcss-mixins')(),
-                require('postcss-nested')(),
-                require('postcss-simple-vars')()
-                // require('cssnano')(),
-              ]
-            }
           }
         ]
       },

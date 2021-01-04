@@ -1,14 +1,52 @@
 import React from 'react'
-import styles from './footer.css'
-import classNames from 'classnames/bind'
 import { Link, withRouter } from 'react-router-dom'
+import styled from 'styled-components'
 
-let cx = classNames.bind(styles)
+
+const Wrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 200px;
+  background-color: black;
+`
+
+const Logo = styled.span`
+  display: inline-block;
+  margin-left: 40px;
+  font-size: 50px;
+  color: white;
+
+  @media screen and (max-width: 812px) {
+    font-size: 30px;
+    margin-left: 20px;
+  }
+`
+
+const Links = styled.div`
+  @media screen and (max-width: 812px) {
+    display: flex;
+    flex-direction: column;
+  }
+
+  a {
+    display: inline-flex;
+    height: 48px;
+    align-items: center;
+    color: white;
+    font-size: 20px;
+    margin-right: 40px;
+
+    @media screen and (max-width: 812px) {
+      margin-right: 20px;
+    }
+  }
+`
 
 function Footer() {
   return (
     <>
-      <div className={cx('wrapper')}>
+      <Wrapper>
         <Link
           to={{
             pathname: '/',
@@ -16,10 +54,10 @@ function Footer() {
           }}
           aria-label="Home"
         >
-          <span className={cx('logo')}>Child Ben</span>
+          <Logo>Child Ben</Logo>
         </Link>
 
-        <div className={cx('links')}>
+        <Links>
           <Link to="/contact/" aria-label="Contact">
             Contact
           </Link>
@@ -29,8 +67,8 @@ function Footer() {
           <Link to="/terms/" aria-label="Terms">
             Terms & Conditions
           </Link>
-        </div>
-      </div>
+        </Links>
+      </Wrapper>
     </>
   )
 }

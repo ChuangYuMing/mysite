@@ -1,9 +1,7 @@
 import React, { useEffect } from 'react'
-import styles from './legal.css'
-import classNames from 'classnames/bind'
 import { Helmet } from 'react-helmet'
+import Wrapper from './Wrapper'
 
-let cx = classNames.bind(styles)
 
 function Terms() {
   useEffect(() => {
@@ -12,10 +10,10 @@ function Terms() {
   }, [])
 
   return (
-    <div className={cx('wrapper')}>
-      <h2>
+    <Wrapper>
+      <h1>
         <strong>Terms and Conditions</strong>
-      </h2>
+      </h1>
 
       <p>Welcome to ChildBen!</p>
 
@@ -326,7 +324,7 @@ function Terms() {
         <meta name="description" content="terms" />
         <meta name="robots" content="noindex" />
       </Helmet>
-    </div>
+    </Wrapper>
   )
 }
 
