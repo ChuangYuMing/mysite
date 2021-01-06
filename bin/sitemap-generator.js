@@ -2,7 +2,7 @@ const { SitemapStream, streamToPromise } = require('sitemap')
 const { Readable } = require('stream')
 const fs = require('fs-extra')
 const { Pool } = require('pg')
-require('dotenv').config()
+require('dotenv').config({ path: '../.env' })
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
@@ -48,7 +48,7 @@ async function generateSitemap() {
     const stream = new SitemapStream({ hostname: 'https://www.childben.com' })
     return streamToPromise(Readable.from(idMap).pipe(stream)).then((data) => {
       console.log(data.toString())
-      fs.outputFileSync('../build/sitemap.xml', data.toString(), function (
+      fs.outputFileSync('../client/build/sitemap.xml', data.toString(), function (
         err
       ) {
         if (err) {

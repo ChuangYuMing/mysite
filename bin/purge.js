@@ -1,6 +1,6 @@
 const axios = require('axios')
 const querystring = require('querystring')
-require('dotenv').config({ path: '.client_secret' })
+require('dotenv').config({ path: '../.env' })
 const { CLOUDFLARE_TOKEN } = process.env
 const COLOR = {
   info: '\x1b[36m',

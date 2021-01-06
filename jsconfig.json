@@ -4,7 +4,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-        "modules/*": ["src/modules/*"]
+        "modules/*": ["client/src/modules/*"]
     }
   },
   "exclude": [

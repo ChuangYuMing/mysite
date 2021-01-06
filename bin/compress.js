@@ -52,5 +52,5 @@ async function main(dirPath) {
 }
 
 console.log(COLOR.done, 'compress...')
-const dirPath = path.join(__dirname, '../build')
+const dirPath = path.join(__dirname, '../client/build')
 main(dirPath)

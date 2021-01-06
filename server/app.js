@@ -7,7 +7,7 @@ const cors = require('cors')
 const helmet = require('helmet')
 const port = process.env.PORT || 3002
 const { Pool } = require('pg')
-require('dotenv').config()
+require('dotenv').config({ path: '../.env' })
 let apiRouter = express.Router()
 let router = express.Router()
 
