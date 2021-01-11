@@ -31,6 +31,7 @@ const Content = styled.div`
 
   a {
     border-bottom: solid 2px #fb3a00;
+    color: unset;
   }
 
   @media screen and (max-width: 812px) {
