@@ -31,10 +31,7 @@ module.exports = {
   },
   resolve: {
     alias: {
-      modules: path.resolve(__dirname, 'src/modules'),
-      static: path.resolve(__dirname, 'src/static'),
-      store: path.resolve(__dirname, 'src/store'),
-      api: path.resolve(__dirname, 'src/api')
+      '@src': path.resolve(__dirname, 'src/')
     }
   },
   externals: {
