@@ -2,45 +2,54 @@ import React, { useEffect, useState } from 'react'
 import TopImage from './TopImage/TopImage'
 import MetaTag from './MetaTag/MetaTag'
 import styled from 'styled-components'
+import Box from '@src/components/Common/Box'
+import css from '@styled-system/css'
 
-const Title = styled.h1`
-  margin-top: 30px;
-  font-size: 2rem;
+const Title = styled('h1')(
+  css({
+    mt: 4,
+    fontSize: [4, null, 5],
+    height: [120, null, 'initial']
+  })
+)
 
-  @media screen and (max-width: 812px) {
-    font-size: 1.8rem;
-    height: 140px;
-  }
-`
+const TopImageWrapper = styled(Box)(
+  css({
+    width: [280, null, 730],
+    height: [186, null, 484],
+    mb: 4,
+    mx: 'auto',
+    textAlign: 'center'
+  })
+)
 
-const TopImageWrapper = styled.div`
-  text-align: center;
-  margin: 0 auto 30px;
-  width: 730px;
-  height: 484px;
+const Content = styled(Box)(
+  css({
+    fontSize: 3,
+    wordWrap: 'break-word',
 
-  @media screen and (max-width: 812px) {
-    width: 280px;
-    height: 185.6438356164px;
-  }
-`
+    a: {
+      borderBottom: 'solid 2px',
+      borderColor: 'accentLighter',
+      color: 'unset'
+    },
 
-const Content = styled.div`
-  font-size: 1.125rem;
-  word-wrap: break-word;
+    ul: {
+      pl: 3,
+      listStyleType: 'disc'
+    },
 
-  a {
-    border-bottom: solid 2px #fb3a00;
-    color: unset;
-  }
+    figure: {
+      m: 0,
+      textAlign: 'center'
+    },
 
-  @media screen and (max-width: 812px) {
-    img {
-      max-width: 280px;
-      max-height: 185px;
+    img: {
+      maxWidth: [280, null, 'initial'],
+      maxHeight: [185, null, 'initial']
     }
-  }
-`
+  })
+)
 
 function ArticleContent(props) {
   let { title, content, url, jpg_base64 } = props.datas

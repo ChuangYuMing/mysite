@@ -8,28 +8,19 @@ import StaticContent from '../StaticContent'
 import { getArticle } from './articleSlice'
 import { useSelector, useDispatch } from 'react-redux'
 import styled from 'styled-components'
+import Box from '@src/components/Common/Box'
+import css from '@styled-system/css'
 
 
-const Wrapper = styled.div`
-  flex: 1;
-  max-width: 730px;
-  margin: 0 auto 40px;
-
-  @media screen and (max-width: 812px) {
-    padding: 20px;
-    max-width: 100vw;
-  }
-
-  figure {
-    margin: 0;
-    text-align: center;
-  }
-
-  ul {
-    padding-left: 20px;
-    list-style-type: disc;
-  }
-`
+const Wrapper = styled(Box)(
+  css({
+    flex: '1 1 auto',
+    maxWidth: ['100vw', null, 730],
+    mb: 4,
+    mx: 'auto',
+    p: [3, null, 0],
+  })
+)
 
 function Article(props) {
   let { url: browserUrl } = props.match.params

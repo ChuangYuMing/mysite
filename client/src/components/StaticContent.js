@@ -28,12 +28,14 @@ export default function StaticContent({ children, element = 'div', ...props }) {
   if (isFromOtherPath || !PRODUCTION || isServerPrerender) {
     return createElement(element, {
       ...props,
+      style: {width: "100%"},
       children
     })
   }
 
   // avoid re-render on the client
   return createElement(element, {
+    style: {width: "100%"},
     suppressHydrationWarning: true,
     dangerouslySetInnerHTML: { __html: '' }
   })

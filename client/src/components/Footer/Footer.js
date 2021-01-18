@@ -1,47 +1,49 @@
 import React from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import styled from 'styled-components'
+import Box from '@src/components/Common/Box'
+import css from '@styled-system/css'
+import { breakpoints } from '@src/components/AppProvider/theme'
 
+const Wrapper = styled(Box)(
+  css({
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    height: 200,
+    bg: 'black'
+  })
+)
 
-const Wrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 200px;
-  background-color: black;
-`
+const Logo = styled('span')(
+  css({
+    display: 'inline-block',
+    ml: [3, null, 4],
+    fontSize: [30, null, 6],
+    color: 'white'
+  })
+)
 
-const Logo = styled.span`
-  display: inline-block;
-  margin-left: 40px;
-  font-size: 50px;
-  color: white;
-
-  @media screen and (max-width: 812px) {
-    font-size: 30px;
-    margin-left: 20px;
-  }
-`
-
-const Links = styled.div`
-  @media screen and (max-width: 812px) {
-    display: flex;
-    flex-direction: column;
-  }
-
-  a {
-    display: inline-flex;
-    height: 48px;
-    align-items: center;
-    color: white;
-    font-size: 20px;
-    margin-right: 40px;
-
-    @media screen and (max-width: 812px) {
-      margin-right: 20px;
+const Links = styled(Box)(
+  css({
+    display: 'flex',
+    flexDirection: 'column',
+    [`@media(min-width: ${breakpoints[1]})`]: {
+      flexDirection: 'row'
     }
-  }
-`
+  })
+)
+
+const FooterLink = styled(Link)(
+  css({
+    display: 'inline-flex',
+    height: 48,
+    alignItems: 'center',
+    color: 'white',
+    fontSize: 3,
+    mr: [3, null, 4]
+  })
+)
 
 function Footer() {
   return (
@@ -58,15 +60,15 @@ function Footer() {
         </Link>
 
         <Links>
-          <Link to="/contact/" aria-label="Contact">
+          <FooterLink to="/contact/" aria-label="Contact">
             Contact
-          </Link>
-          <Link to="/privacy-policy/" aria-label="Privacy Policy">
+          </FooterLink>
+          <FooterLink to="/privacy-policy/" aria-label="Privacy Policy">
             Privacy Policy
-          </Link>
-          <Link to="/terms/" aria-label="Terms">
+          </FooterLink>
+          <FooterLink to="/terms/" aria-label="Terms">
             Terms & Conditions
-          </Link>
+          </FooterLink>
         </Links>
       </Wrapper>
     </>

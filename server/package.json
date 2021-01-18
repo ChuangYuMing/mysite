@@ -19,6 +19,6 @@
   },
   "scripts": {
     "server": "NODE_ENV=production node app.js",
-    "test-build": "http-server ../client/build -p 9000"
+    "test-build": "http-server ../client/build -p 9000 -g"
   }
 }

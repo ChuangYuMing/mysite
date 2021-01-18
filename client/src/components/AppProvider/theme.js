@@ -1,12 +1,26 @@
+export const breakpoints =  ['40em', '52em', '64em', '80em']
+
 const theme = {
-  breakpoints: ['40em', '52em', '64em', '80em'],
+  breakpoints,
+  mediaQueries: {
+    small: `@media screen and (min-width: ${breakpoints[0]})`,
+    medium: `@media screen and (min-width: ${breakpoints[1]})`,
+    large: `@media screen and (min-width: ${breakpoints[2]})`,
+  },
   space: [0, 4, 8, 16, 32, 64, 128, 256, 512],
-  fontSizes: [12, 14, 16, 24, 32, 48, 64],
+  fontSizes: [12, 14, 16, 18, 24, 32, 48, 64],
   colors: {
-    black: '#212121',
-    primary: '#07c',
+    greyDarkestVariant: '#4a4a4a',
+    greyDarkest: '#57626e',
+    greyDarker: '#8698aa',
+    greyDark: '#7b7b7b',
+    grey: '#caced6',
+    greyLighter: '#dce4ec',
+    greyLightest: '#f9f9f9',
     primaryDark: '#0D47A1',
-    gray: '#f6f6ff'
+    primary: '#07c',
+    accent: '#9a4b4b',
+    accentLighter: '#fb3a00'
   },
   buttons: {
     primary: {

@@ -9,55 +9,58 @@ import { getPagesByCategory, clearPages } from './pagesSlice'
 import StaticContent from '../StaticContent'
 import { useSelector, useDispatch } from 'react-redux'
 import styled from 'styled-components'
+import Box from '@src/components/Common/Box'
+import css from '@styled-system/css'
 
-const Wrapper = styled.div`
-  flex: 1;
-  width: 100%;
-  min-height: calc(100vh - 85px);
-`
+const Wrapper = styled(Box)(
+  css({
+    flex: '1 1 auto',
+    width: '100%',
+    minHeight: 'calc(100vh - 85px)'
+  })
+)
 
-const Items = styled.div`
-  margin: 10px auto 0 auto;
-  padding: 20px;
+const Articles = styled(Box)(
+  css({
+    width: '100%',
+    mt: 2,
+    mx: 'auto',
+    p: [0, null, 3]
+  })
+)
 
-  @media screen and (max-width: 812px) {
-    width: 100%;
-    padding: 0;
-  }
-`
+const Article = styled(Box)(
+  css({
+    display: 'flex',
+    alignItems: 'center',
+    width: '100%',
+    height: 120,
+    p: 3,
+    border: 'solid 1px',
+    borderColor: 'greyLighter',
+    cursor: 'pointer'
+  })
+)
 
-const Item = styled.div`
-  display: flex;
-  align-items: center;
-  width: 100%;
-  height: 120px;
-  font-size: 30px;
-  border: 1px solid #e9e9e9;
-  cursor: pointer;
-  padding: 20px 15px;
-  border-bottom: 0;
+const ArticleLogo = styled('img')(
+  css({
+    width: 100,
+    height: 100
+  })
+)
 
-  @media screen and (max-width: 812px) {
-    font-size: 15px;
-  }
+const ArticleTitle = styled(Link)(
+  css({
+    textOverflow: 'ellipsis',
+    fontSize: [4, null, 5],
+    ml: 2,
+    color: 'greyDarkestVariant',
 
-  img {
-    width: 100px;
-    height: 100px;
-  }
-
-  a {
-    margin-left: 10px;
-    text-overflow: ellipsis;
-    color: #4c4c4ce3;
-  }
-
-  &:hover {
-    a {
-      color: #9a4b4b;
+    '&:hover': {
+      color: 'accent'
     }
-  }
-`
+  })
+)
 
 function Pages(props) {
   let { category } = props.match.params
@@ -89,27 +92,27 @@ function Pages(props) {
 
   let rows = pages.map((item) => {
     return (
-      <Item key={item.title}>
-        <img
+      <Article key={item.title}>
+        <ArticleLogo
           src={`${CDN_DOMAIN}/${item.url}/${item.url}-thumb.jpg`}
           alt={item.title}
         />
-        <Link
+        <ArticleTitle
           to={{
             pathname: `/${item.category}/${item.url}/`,
             state: { fromOtherPath: true }
           }}
         >
           {item.title}
-        </Link>
-      </Item>
+        </ArticleTitle>
+      </Article>
     )
   })
 
   return (
     <StaticContent>
       <Wrapper>
-        <Items>{rows}</Items>
+        <Articles>{rows}</Articles>
         <Helmet>
           <title>
             ChildBen{category ? `(${category})` : ''}: Guiding you through
